@@ -1,0 +1,17 @@
+{
+  "outputPaths": {
+    "features": "src/test/resources/features/{module}/",
+    "testData": "TestDatastore/json/",
+    "constants": "src/main/java/kroviq/constants/"
+  },
+  "generation": {
+    "maxScenariosPerFlow": 6,
+    "includeEdgeCases": true,
+    "includeNegativeCases": true,
+    "tagPrefix": "@TC_{MODULE}_"
+  },
+  "preview": {
+    "outputDir": "spark-output/",
+    "keepIntermediateOutputs": false
+  }
+}

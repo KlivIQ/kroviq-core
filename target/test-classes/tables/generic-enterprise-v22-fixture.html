@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enterprise Table v2.2 Fixture — Selection + State</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #f5f5f5; }
+        .selected { background: #e6f7ff; }
+        .loading { display: none; padding: 20px; text-align: center; }
+        .loading.active { display: block; }
+        .empty-state { display: none; padding: 20px; text-align: center; color: #999; }
+        .empty-state.active { display: block; }
+        .pagination { margin-top: 10px; }
+        .pagination button { margin: 0 4px; }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<!-- Main enterprise table with selection -->
+<div id="enterpriseTable">
+    <table id="dataGrid" role="grid">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAll" aria-label="Select all"></th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr data-row-id="1">
+                <td><input type="checkbox" class="row-select" aria-label="Select row"></td>
+                <td>ORD-001</td>
+                <td>Alice Johnson</td>
+                <td>Widget A</td>
+                <td>1500.00</td>
+                <td>Active</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="2">
+                <td><input type="checkbox" class="row-select" aria-label="Select row"></td>
+                <td>ORD-002</td>
+                <td>Bob Smith</td>
+                <td>Widget B</td>
+                <td>2300.00</td>
+                <td>Pending</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="3">
+                <td><input type="checkbox" class="row-select" aria-label="Select row"></td>
+                <td>ORD-003</td>
+                <td>Carol White</td>
+                <td>Widget A</td>
+                <td>980.00</td>
+                <td>Active</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="4">
+                <td><input type="checkbox" class="row-select" aria-label="Select row"></td>
+                <td>ORD-004</td>
+                <td>David Brown</td>
+                <td>Widget C</td>
+                <td>4100.00</td>
+                <td>Shipped</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="5">
+                <td><input type="checkbox" class="row-select" aria-label="Select row"></td>
+                <td>ORD-005</td>
+                <td>Eve Davis</td>
+                <td>Widget B</td>
+                <td>750.00</td>
+                <td>Cancelled</td>
+                <td>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="loading" id="loadingIndicator" aria-busy="true">Loading data...</div>
+    <div class="empty-state" id="emptyState">No records found</div>
+    <nav class="pagination" aria-label="Table pagination">
+        <button class="prev" aria-label="Previous" disabled>Previous</button>
+        <button class="page" data-page="1" aria-current="page">1</button>
+        <button class="page" data-page="2">2</button>
+        <button class="next" aria-label="Next">Next</button>
+    </nav>
+</div>
+
+<!-- Empty state table (for isEmpty/getEmptyStateMessage tests) -->
+<div id="emptyTableContainer">
+    <table id="emptyGrid" role="grid">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="emptySelectAll" aria-label="Select all"></th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="empty-state active" id="emptyGridMessage">No data available</div>
+</div>
+
+<!-- Loading state table (for isLoading tests) -->
+<div id="loadingTableContainer">
+    <table id="loadingGrid" role="grid">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="loading active" id="loadingGridIndicator" aria-busy="true">Fetching records...</div>
+</div>
+
+<script>
+    // Select All / Deselect All logic
+    document.getElementById('selectAll').addEventListener('change', function() {
+        var checkboxes = document.querySelectorAll('#tableBody .row-select');
+        var rows = document.querySelectorAll('#tableBody tr');
+        checkboxes.forEach(function(cb, i) {
+            cb.checked = this.checked;
+            if (this.checked) {
+                rows[i].classList.add('selected');
+            } else {
+                rows[i].classList.remove('selected');
+            }
+        }.bind(this));
+    });
+
+    // Individual row selection
+    document.querySelectorAll('#tableBody .row-select').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+            var row = this.closest('tr');
+            if (this.checked) {
+                row.classList.add('selected');
+            } else {
+                row.classList.remove('selected');
+            }
+            // Update header checkbox state
+            var allCheckboxes = document.querySelectorAll('#tableBody .row-select');
+            var allChecked = Array.from(allCheckboxes).every(function(c) { return c.checked; });
+            document.getElementById('selectAll').checked = allChecked;
+        });
+    });
+
+    // Pagination (page 2 has 5 more records)
+    var page2Data = [
+        {id: 'ORD-006', customer: 'Frank Miller', product: 'Widget D', amount: '3200.00', status: 'Active'},
+        {id: 'ORD-007', customer: 'Grace Lee', product: 'Widget A', amount: '1100.00', status: 'Pending'},
+        {id: 'ORD-008', customer: 'Henry Wilson', product: 'Widget C', amount: '5500.00', status: 'Shipped'},
+        {id: 'ORD-009', customer: 'Iris Taylor', product: 'Widget B', amount: '890.00', status: 'Active'},
+        {id: 'ORD-010', customer: 'Jack Anderson', product: 'Widget A', amount: '2100.00', status: 'Cancelled'}
+    ];
+
+    var page1Data = null; // stored on first page change
+    var currentPage = 1;
+
+    function renderPage(data) {
+        var tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        data.forEach(function(item, i) {
+            var tr = document.createElement('tr');
+            tr.setAttribute('data-row-id', item.id);
+            tr.innerHTML = '<td><input type="checkbox" class="row-select" aria-label="Select row"></td>' +
+                '<td>' + item.id + '</td>' +
+                '<td>' + item.customer + '</td>' +
+                '<td>' + item.product + '</td>' +
+                '<td>' + item.amount + '</td>' +
+                '<td>' + item.status + '</td>' +
+                '<td><button data-action="Edit">Edit</button> <a href="#" title="View">View</a></td>';
+            tbody.appendChild(tr);
+        });
+        // Re-bind row checkboxes
+        document.querySelectorAll('#tableBody .row-select').forEach(function(cb) {
+            cb.addEventListener('change', function() {
+                var row = this.closest('tr');
+                if (this.checked) row.classList.add('selected');
+                else row.classList.remove('selected');
+            });
+        });
+        document.getElementById('selectAll').checked = false;
+    }
+
+    document.querySelector('.pagination .next').addEventListener('click', function() {
+        if (currentPage === 1) {
+            // Save page 1 data
+            page1Data = Array.from(document.querySelectorAll('#tableBody tr')).map(function(tr) {
+                var cells = tr.querySelectorAll('td');
+                return {
+                    id: cells[1].textContent, customer: cells[2].textContent,
+                    product: cells[3].textContent, amount: cells[4].textContent,
+                    status: cells[5].textContent
+                };
+            });
+            renderPage(page2Data);
+            currentPage = 2;
+            document.querySelector('.pagination .prev').disabled = false;
+            document.querySelector('.pagination .next').disabled = true;
+        }
+    });
+
+    document.querySelector('.pagination .prev').addEventListener('click', function() {
+        if (currentPage === 2 && page1Data) {
+            renderPage(page1Data);
+            currentPage = 1;
+            document.querySelector('.pagination .prev').disabled = true;
+            document.querySelector('.pagination .next').disabled = false;
+        }
+    });
+</script>
+</body>
+</html>

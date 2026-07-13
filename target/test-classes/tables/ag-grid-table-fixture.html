@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head><title>AG Grid Table Engine Fixture</title></head>
+<body>
+<div id="agGridFixture" class="ag-root-wrapper">
+    <div class="ag-root ag-grid">
+        <!-- Header -->
+        <div class="ag-header">
+            <div class="ag-header-row">
+                <div class="ag-header-cell" aria-colindex="1">
+                    <span class="ag-header-cell-text">Policy Number</span>
+                </div>
+                <div class="ag-header-cell" aria-colindex="2">
+                    <span class="ag-header-cell-text">Insured Name</span>
+                </div>
+                <div class="ag-header-cell" aria-colindex="3">
+                    <span class="ag-header-cell-text">Status</span>
+                </div>
+                <div class="ag-header-cell" aria-colindex="4">
+                    <span class="ag-header-cell-text">Premium</span>
+                </div>
+                <div class="ag-header-cell" aria-colindex="5">
+                    <span class="ag-header-cell-text">Actions</span>
+                </div>
+            </div>
+        </div>
+        <!-- Body -->
+        <div class="ag-body-viewport">
+            <div class="ag-row" row-index="0">
+                <div class="ag-cell" aria-colindex="1">POL-001</div>
+                <div class="ag-cell" aria-colindex="2">John Smith</div>
+                <div class="ag-cell" aria-colindex="3">Active</div>
+                <div class="ag-cell" aria-colindex="4">1500.00</div>
+                <div class="ag-cell" aria-colindex="5">
+                    <button title="Edit">Edit</button>
+                    <button title="View">View</button>
+                    <button class="more" aria-label="more">⋮</button>
+                </div>
+            </div>
+            <div class="ag-row" row-index="1">
+                <div class="ag-cell" aria-colindex="1">POL-002</div>
+                <div class="ag-cell" aria-colindex="2">Jane Doe</div>
+                <div class="ag-cell" aria-colindex="3">Pending</div>
+                <div class="ag-cell" aria-colindex="4">2300.00</div>
+                <div class="ag-cell" aria-colindex="5">
+                    <button title="Edit">Edit</button>
+                    <button title="View">View</button>
+                    <button class="more" aria-label="more">⋮</button>
+                </div>
+            </div>
+            <div class="ag-row" row-index="2">
+                <div class="ag-cell" aria-colindex="1">POL-003</div>
+                <div class="ag-cell" aria-colindex="2">Bob Wilson</div>
+                <div class="ag-cell" aria-colindex="3">Active</div>
+                <div class="ag-cell" aria-colindex="4">980.00</div>
+                <div class="ag-cell" aria-colindex="5">
+                    <button title="Edit">Edit</button>
+                    <button title="View">View</button>
+                    <button class="more" aria-label="more">⋮</button>
+                </div>
+            </div>
+            <div class="ag-row" row-index="3">
+                <div class="ag-cell" aria-colindex="1">POL-004</div>
+                <div class="ag-cell" aria-colindex="2">Alice Brown</div>
+                <div class="ag-cell" aria-colindex="3">Cancelled</div>
+                <div class="ag-cell" aria-colindex="4">0.00</div>
+                <div class="ag-cell" aria-colindex="5">
+                    <button title="View">View</button>
+                </div>
+            </div>
+            <div class="ag-row" row-index="4">
+                <div class="ag-cell" aria-colindex="1">POL-005</div>
+                <div class="ag-cell" aria-colindex="2">Charlie Davis</div>
+                <div class="ag-cell" aria-colindex="3">Active</div>
+                <div class="ag-cell" aria-colindex="4">3200.00</div>
+                <div class="ag-cell" aria-colindex="5">
+                    <button title="Edit">Edit</button>
+                    <button title="View">View</button>
+                    <button class="more" aria-label="more">⋮</button>
+                </div>
+            </div>
+        </div>
+        <!-- Pagination Panel -->
+        <div class="ag-paging-panel">
+            <button ref="btPrevious" class="ag-paging-button ag-disabled" disabled="true">Previous</button>
+            <span class="ag-paging-page-summary-panel">Page 1 of 3</span>
+            <button ref="btNext" class="ag-paging-button">Next</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

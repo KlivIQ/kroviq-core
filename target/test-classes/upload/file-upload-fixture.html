@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Fixture</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 4px; }
+        .section h3 { margin-top: 0; }
+        .dropzone {
+            border: 2px dashed #ccc; padding: 40px; text-align: center;
+            background: #fafafa; cursor: pointer; transition: border-color 0.3s;
+        }
+        .dropzone.dragover { border-color: #1890ff; background: #e6f7ff; }
+        .ant-upload { display: inline-block; }
+        .ant-upload-drag { border: 2px dashed #d9d9d9; border-radius: 2px; padding: 20px; text-align: center; cursor: pointer; }
+        .upload-btn { padding: 8px 16px; background: #1890ff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .file-list { margin-top: 10px; padding: 5px; background: #f5f5f5; min-height: 20px; }
+        .file-item { padding: 4px 8px; margin: 2px 0; background: white; border-radius: 2px; }
+        #status { margin-top: 10px; padding: 8px; background: #f0f0f0; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>File Upload Test Fixture</h1>
+
+    <!-- 1. Standard visible input[type=file] -->
+    <div class="section" id="section-standard">
+        <h3>1. Standard File Input</h3>
+        <input type="file" id="standard-file-input" data-testid="standard-upload">
+        <div class="file-list" id="standard-files"></div>
+    </div>
+
+    <!-- 2. Hidden input with custom button trigger -->
+    <div class="section" id="section-button-trigger">
+        <h3>2. Button-Triggered Upload</h3>
+        <button class="upload-btn" id="upload-button" onclick="document.getElementById('hidden-file-input').click()">
+            Choose File
+        </button>
+        <input type="file" id="hidden-file-input" style="display:none;">
+        <div class="file-list" id="button-files"></div>
+    </div>
+
+    <!-- 3. Multi-file input -->
+    <div class="section" id="section-multi">
+        <h3>3. Multi-File Upload</h3>
+        <input type="file" id="multi-file-input" multiple data-testid="multi-upload">
+        <div class="file-list" id="multi-files"></div>
+    </div>
+
+    <!-- 4. AntD-style wrapper (hidden input inside wrapper) -->
+    <div class="section" id="section-antd">
+        <h3>4. AntD-Style Upload Wrapper</h3>
+        <div class="ant-upload" id="antd-upload-wrapper">
+            <span class="ant-upload-btn" role="button">
+                <input type="file" style="display:none;" id="antd-file-input" accept="*/*">
+                <button class="upload-btn">Click to Upload</button>
+            </span>
+        </div>
+        <div class="file-list" id="antd-files"></div>
+    </div>
+
+    <!-- 5. Drop zone (no visible input) -->
+    <div class="section" id="section-dropzone">
+        <h3>5. Drop Zone Upload</h3>
+        <div class="dropzone" id="drop-zone" data-testid="dropzone-upload">
+            <p>Drag &amp; drop files here or click to browse</p>
+            <input type="file" id="dropzone-hidden-input" style="display:none;">
+        </div>
+        <div class="file-list" id="dropzone-files"></div>
+    </div>
+
+    <!-- 6. AntD drag upload style -->
+    <div class="section" id="section-antd-drag">
+        <h3>6. AntD Drag Upload</h3>
+        <div class="ant-upload ant-upload-drag" id="antd-drag-upload">
+            <div class="ant-upload-drag-container">
+                <p>Click or drag file to this area to upload</p>
+                <input type="file" style="display:none;" id="antd-drag-input">
+            </div>
+        </div>
+        <div class="file-list" id="antd-drag-files"></div>
+    </div>
+
+    <!-- 7. Pure drop zone without any input (JS-only handling) -->
+    <div class="section" id="section-pure-dropzone">
+        <h3>7. Pure Drop Zone (No Input)</h3>
+        <div class="dropzone file-drop" id="pure-drop-zone">
+            <p>Drop files here (no input element)</p>
+        </div>
+        <div class="file-list" id="pure-dropzone-files"></div>
+    </div>
+
+    <div id="status">Status: Ready</div>
+
+    <script>
+        // Track uploads for verification
+        window.uploadedFiles = {};
+
+        function recordUpload(sectionId, files) {
+            window.uploadedFiles[sectionId] = window.uploadedFiles[sectionId] || [];
+            for (var i = 0; i < files.length; i++) {
+                window.uploadedFiles[sectionId].push(files[i].name);
+            }
+            updateStatus('Upload recorded: ' + files.length + ' file(s) to ' + sectionId);
+            updateFileList(sectionId, files);
+        }
+
+        function updateFileList(sectionId, files) {
+            var listId = sectionId + '-files';
+            var list = document.getElementById(listId);
+            if (!list) return;
+            for (var i = 0; i < files.length; i++) {
+                var item = document.createElement('div');
+                item.className = 'file-item';
+                item.textContent = files[i].name + ' (' + files[i].size + ' bytes)';
+                list.appendChild(item);
+            }
+        }
+
+        function updateStatus(msg) {
+            document.getElementById('status').textContent = 'Status: ' + msg;
+        }
+
+        // 1. Standard input
+        document.getElementById('standard-file-input').addEventListener('change', function(e) {
+            recordUpload('standard', e.target.files);
+        });
+
+        // 2. Hidden input (button trigger)
+        document.getElementById('hidden-file-input').addEventListener('change', function(e) {
+            recordUpload('button', e.target.files);
+        });
+
+        // 3. Multi-file input
+        document.getElementById('multi-file-input').addEventListener('change', function(e) {
+            recordUpload('multi', e.target.files);
+        });
+
+        // 4. AntD wrapper
+        document.getElementById('antd-file-input').addEventListener('change', function(e) {
+            recordUpload('antd', e.target.files);
+        });
+
+        // 5. Drop zone with hidden input
+        var dropZone = document.getElementById('drop-zone');
+        dropZone.addEventListener('dragenter', function(e) { e.preventDefault(); this.classList.add('dragover'); });
+        dropZone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', function(e) { this.classList.remove('dragover'); });
+        dropZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+                recordUpload('dropzone', e.dataTransfer.files);
+            }
+        });
+        document.getElementById('dropzone-hidden-input').addEventListener('change', function(e) {
+            recordUpload('dropzone', e.target.files);
+        });
+
+        // 6. AntD drag
+        var antdDrag = document.getElementById('antd-drag-upload');
+        antdDrag.addEventListener('dragover', function(e) { e.preventDefault(); });
+        antdDrag.addEventListener('drop', function(e) {
+            e.preventDefault();
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+                recordUpload('antd-drag', e.dataTransfer.files);
+            }
+        });
+        document.getElementById('antd-drag-input').addEventListener('change', function(e) {
+            recordUpload('antd-drag', e.target.files);
+        });
+
+        // 7. Pure drop zone
+        var pureDrop = document.getElementById('pure-drop-zone');
+        pureDrop.addEventListener('dragenter', function(e) { e.preventDefault(); this.classList.add('dragover'); });
+        pureDrop.addEventListener('dragover', function(e) { e.preventDefault(); });
+        pureDrop.addEventListener('dragleave', function(e) { this.classList.remove('dragover'); });
+        pureDrop.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+                recordUpload('pure-dropzone', e.dataTransfer.files);
+            }
+        });
+    </script>
+</body>
+</html>

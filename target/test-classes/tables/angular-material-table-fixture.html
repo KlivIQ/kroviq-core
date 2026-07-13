@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head><title>Angular Material Table Engine Fixture</title></head>
+<body>
+<div id="angularMaterialTableFixture" class="mat-table-container">
+    <table mat-table class="mat-mdc-table">
+        <thead>
+            <tr class="mat-mdc-header-row">
+                <th mat-header-cell class="mat-mdc-header-cell">Ticket ID</th>
+                <th mat-header-cell class="mat-mdc-header-cell">Title</th>
+                <th mat-header-cell class="mat-mdc-header-cell">Assignee</th>
+                <th mat-header-cell class="mat-mdc-header-cell">Priority</th>
+                <th mat-header-cell class="mat-mdc-header-cell">Status</th>
+                <th mat-header-cell class="mat-mdc-header-cell">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr mat-row class="mat-mdc-row">
+                <td mat-cell class="mat-mdc-cell">TKT-001</td>
+                <td mat-cell class="mat-mdc-cell">Login page broken</td>
+                <td mat-cell class="mat-mdc-cell">Sarah Parker</td>
+                <td mat-cell class="mat-mdc-cell"><span class="mat-mdc-chip">Critical</span></td>
+                <td mat-cell class="mat-mdc-cell">Open</td>
+                <td mat-cell class="mat-mdc-cell"><button title="Edit">Edit</button> <button title="Assign">Assign</button></td>
+            </tr>
+            <tr mat-row class="mat-mdc-row">
+                <td mat-cell class="mat-mdc-cell">TKT-002</td>
+                <td mat-cell class="mat-mdc-cell">Dashboard slow</td>
+                <td mat-cell class="mat-mdc-cell">James Wilson</td>
+                <td mat-cell class="mat-mdc-cell"><span class="mat-mdc-chip">High</span></td>
+                <td mat-cell class="mat-mdc-cell">In Progress</td>
+                <td mat-cell class="mat-mdc-cell"><button title="Edit">Edit</button> <button title="Assign">Assign</button></td>
+            </tr>
+            <tr mat-row class="mat-mdc-row">
+                <td mat-cell class="mat-mdc-cell">TKT-003</td>
+                <td mat-cell class="mat-mdc-cell">Export fails</td>
+                <td mat-cell class="mat-mdc-cell">Sarah Parker</td>
+                <td mat-cell class="mat-mdc-cell"><span class="mat-mdc-chip">Medium</span></td>
+                <td mat-cell class="mat-mdc-cell">Open</td>
+                <td mat-cell class="mat-mdc-cell"><button title="Edit">Edit</button> <button title="Assign">Assign</button></td>
+            </tr>
+            <tr mat-row class="mat-mdc-row">
+                <td mat-cell class="mat-mdc-cell">TKT-004</td>
+                <td mat-cell class="mat-mdc-cell">API timeout</td>
+                <td mat-cell class="mat-mdc-cell">Mike Chen</td>
+                <td mat-cell class="mat-mdc-cell"><span class="mat-mdc-chip">High</span></td>
+                <td mat-cell class="mat-mdc-cell">Resolved</td>
+                <td mat-cell class="mat-mdc-cell"><button title="Edit">Edit</button> <button title="Assign">Assign</button></td>
+            </tr>
+            <tr mat-row class="mat-mdc-row">
+                <td mat-cell class="mat-mdc-cell">TKT-005</td>
+                <td mat-cell class="mat-mdc-cell">Memory leak</td>
+                <td mat-cell class="mat-mdc-cell">James Wilson</td>
+                <td mat-cell class="mat-mdc-cell"><span class="mat-mdc-chip">Critical</span></td>
+                <td mat-cell class="mat-mdc-cell">Open</td>
+                <td mat-cell class="mat-mdc-cell"><button title="Edit">Edit</button> <button title="Assign">Assign</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator class="mat-mdc-paginator">
+        <button class="mat-mdc-paginator-navigation-previous" aria-label="Previous page" disabled>Previous</button>
+        <span class="mat-mdc-paginator-range-label">1 – 5 of 15</span>
+        <button class="mat-mdc-paginator-navigation-next" aria-label="Next page">Next</button>
+    </mat-paginator>
+</div>
+</body>
+</html>

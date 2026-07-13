@@ -1,0 +1,322 @@
+[
+  {
+    "keyword": "When",
+    "pattern": "I open {string} from main menu",
+    "category": "NAVIGATE",
+    "params": ["menuName"],
+    "source": "CommonSteps",
+    "example": "When I open \"ModuleName\" from main menu"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I click on {string} on {string} page",
+    "category": "CLICK",
+    "params": ["element", "page"],
+    "source": "CommonSteps",
+    "example": "When I click on \"SAVE_BTN\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I click on {string} in {string} on {string} page",
+    "category": "CLICK",
+    "params": ["element", "section", "page"],
+    "source": "CommonSteps",
+    "example": "When I click on \"ADD_BTN\" in \"Header\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I click on {string} in modal",
+    "category": "CLICK",
+    "params": ["element"],
+    "source": "CommonSteps",
+    "example": "When I click on \"SAVE_BTN\" in modal"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I click on {string}",
+    "category": "CLICK",
+    "params": ["element"],
+    "source": "CommonSteps",
+    "example": "When I click on \"SAVE_BTN\""
+  },
+  {
+    "keyword": "When",
+    "pattern": "I click on {string} tab in modal",
+    "category": "CLICK",
+    "params": ["element"],
+    "source": "CommonSteps",
+    "example": "When I click on \"DETAILS_TAB\" tab in modal"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I close modal",
+    "category": "CLICK",
+    "params": [],
+    "source": "CommonSteps",
+    "example": "When I close modal"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I enter {string} in {string} on {string} page",
+    "category": "INPUT",
+    "params": ["value", "element", "page"],
+    "source": "CommonSteps",
+    "example": "When I enter \"TD_Username\" in \"USERNAME_FIELD\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I enter {string} in {string} field on {string} page",
+    "category": "INPUT",
+    "params": ["value", "element", "page"],
+    "source": "CommonSteps",
+    "example": "When I enter \"TD_Username\" in \"USERNAME\" field on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I enter {string} in {string}",
+    "category": "INPUT",
+    "params": ["value", "element"],
+    "source": "CommonSteps",
+    "example": "When I enter \"TD_Value\" in \"FIELD\""
+  },
+  {
+    "keyword": "When",
+    "pattern": "I select {string} from {string} on {string} page",
+    "category": "SELECT",
+    "params": ["value", "element", "page"],
+    "source": "CommonSteps",
+    "example": "When I select \"TD_Country\" from \"COUNTRY_DROPDOWN\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I select {string} from {string} in modal",
+    "category": "SELECT",
+    "params": ["value", "element"],
+    "source": "CommonSteps",
+    "example": "When I select \"TD_Value\" from \"DROPDOWN\" in modal"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I select {string} from {string} and verify {string} is populated with {string} and is {string} on {string} page",
+    "category": "SELECT",
+    "params": ["value", "element", "depElement", "depValue", "state", "page"],
+    "source": "CommonSteps",
+    "example": "When I select \"TD_Company\" from \"COMPANY_DD\" and verify \"LOB_FIELD\" is populated with \"TD_Lob\" and is \"disabled\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I set {string} date to {string} on {string} page",
+    "category": "DATE",
+    "params": ["element", "value", "page"],
+    "source": "CommonSteps",
+    "example": "When I set \"START_DATE\" date to \"TD_StartDate\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I set {string} date to {string} in modal",
+    "category": "DATE",
+    "params": ["element", "value"],
+    "source": "CommonSteps",
+    "example": "When I set \"DATE_FIELD\" date to \"TD_Date\" in modal"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I set {string} datetime to {string} on {string} page",
+    "category": "DATE",
+    "params": ["element", "value", "page"],
+    "source": "CommonSteps",
+    "example": "When I set \"DATETIME_FIELD\" datetime to \"TD_DateTime\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I set {string} to {string} on {string} page",
+    "category": "TOGGLE",
+    "params": ["element", "value", "page"],
+    "source": "CommonSteps",
+    "example": "When I set \"ACTIVE_TOGGLE\" to \"TD_ToggleValue\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I select radio option {string} from {string} on {string} page",
+    "category": "RADIO",
+    "params": ["value", "element", "page"],
+    "source": "CommonSteps",
+    "example": "When I select radio option \"TD_Option\" from \"RADIO_GROUP\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I set {string} checkbox to {string} on {string} page",
+    "category": "CHECKBOX",
+    "params": ["element", "value", "page"],
+    "source": "CommonSteps",
+    "example": "When I set \"AGREE_CHECKBOX\" checkbox to \"TD_Value\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify element {string} is enabled on {string} page",
+    "category": "VALIDATE_ELEMENT",
+    "params": ["element", "page"],
+    "source": "CommonSteps",
+    "example": "Then I verify element \"SAVE_BTN\" is enabled on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify element {string} is disabled on {string} page",
+    "category": "VALIDATE_ELEMENT",
+    "params": ["element", "page"],
+    "source": "CommonSteps",
+    "example": "Then I verify element \"SAVE_BTN\" is disabled on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify {string} has value {string} and is {string} on {string} page",
+    "category": "VALIDATE_ELEMENT",
+    "params": ["element", "value", "state", "page"],
+    "source": "CommonSteps",
+    "example": "Then I verify \"FIELD\" has value \"TD_Value\" and is \"disabled\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I should see the {string} page",
+    "category": "VALIDATE_ELEMENT",
+    "params": ["page"],
+    "source": "CommonSteps",
+    "example": "Then I should see the \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I should see the {string} on {string} page",
+    "category": "VALIDATE_ELEMENT",
+    "params": ["section", "page"],
+    "source": "CommonSteps",
+    "example": "Then I should see the \"Header\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I validate message {string} contains {string} from {string} module on {string} page",
+    "category": "VALIDATE_MESSAGE",
+    "params": ["element", "value", "module", "page"],
+    "source": "CommonSteps",
+    "example": "Then I validate message \"ERROR_MSG\" contains \"TD_Error\" from \"LoginErrorMessage\" module on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I validate {string} outcome",
+    "category": "VALIDATE_MESSAGE",
+    "params": ["outcome"],
+    "source": "CommonSteps",
+    "example": "Then I validate \"save\" outcome"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify toast message {string}",
+    "category": "VALIDATE_MESSAGE",
+    "params": ["message"],
+    "source": "CommonSteps",
+    "example": "Then I verify toast message \"Record saved successfully\""
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify record with {string} = {string} exists in {string} table",
+    "category": "VALIDATE_TABLE",
+    "params": ["column", "value", "table"],
+    "source": "CommonSteps",
+    "example": "Then I verify record with \"Name\" = \"TD_Name\" exists in \"listingTable\" table"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify first row in {string} table has {string} = {string}",
+    "category": "VALIDATE_TABLE",
+    "params": ["table", "column", "value"],
+    "source": "CommonSteps",
+    "example": "Then I verify first row in \"listingTable\" table has \"Name\" = \"TD_Name\""
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify record with {string} = {string} has status {string} in {string} table",
+    "category": "VALIDATE_TABLE",
+    "params": ["column", "value", "status", "table"],
+    "source": "CommonSteps",
+    "example": "Then I verify record with \"Name\" = \"TD_Name\" has status \"Active\" in \"listingTable\" table"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I perform {string} action on record with {string} = {string} in {string} table",
+    "category": "TABLE_ACTION",
+    "params": ["action", "column", "value", "table"],
+    "source": "CommonSteps",
+    "example": "When I perform \"Edit\" action on record with \"Name\" = \"TD_Name\" in \"listingTable\" table"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I perform {string} action on record with {string} = {string} having status {string} in {string} table",
+    "category": "TABLE_ACTION",
+    "params": ["action", "column", "value", "status", "table"],
+    "source": "CommonSteps",
+    "example": "When I perform \"Approve\" action on record with \"Name\" = \"TD_Name\" having status \"Pending\" in \"listingTable\" table"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I remember value of {string} on {string} page as {string}",
+    "category": "VALUE_CAPTURE",
+    "params": ["element", "page", "alias"],
+    "source": "CommonSteps",
+    "example": "Then I remember value of \"QQ_NUMBER\" on \"LoginPage\" page as \"qqNumber\""
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I verify {string} on {string} page equals remembered value {string}",
+    "category": "VALUE_CAPTURE",
+    "params": ["element", "page", "alias"],
+    "source": "CommonSteps",
+    "example": "Then I verify \"QQ_NUMBER\" on \"LoginPage\" page equals remembered value \"qqNumber\""
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I use remembered value {string} in {string} on {string} page",
+    "category": "VALUE_CAPTURE",
+    "params": ["alias", "element", "page"],
+    "source": "CommonSteps",
+    "example": "Then I use remembered value \"qqNumber\" in \"SEARCH_FIELD\" on \"LoginPage\" page"
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I wait for {string} seconds",
+    "category": "WAIT",
+    "params": ["seconds"],
+    "source": "CommonSteps",
+    "example": "Then I wait for \"3\" seconds"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I log {string} with status {string}",
+    "category": "LOG",
+    "params": ["message", "status"],
+    "source": "CommonSteps",
+    "example": "When I log \"Step completed\" with status \"INFO\""
+  },
+  {
+    "keyword": "Then",
+    "pattern": "I report step {string} with status {string}",
+    "category": "LOG",
+    "params": ["message", "status"],
+    "source": "CommonSteps",
+    "example": "Then I report step \"Verification passed\" with status \"PASS\""
+  },
+  {
+    "keyword": "When",
+    "pattern": "I upload {string} via {string} on {string} page",
+    "category": "INPUT",
+    "params": ["filePath", "element", "page"],
+    "source": "CommonSteps",
+    "example": "When I upload \"TD_FilePath\" via \"UPLOAD_BTN\" on \"DocumentPage\" page"
+  },
+  {
+    "keyword": "When",
+    "pattern": "I upload file {string} to {string}",
+    "category": "INPUT",
+    "params": ["filePath", "element"],
+    "source": "CommonSteps",
+    "example": "When I upload file \"TD_FilePath\" to \"FILE_INPUT\""
+  }
+]

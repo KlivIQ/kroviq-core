@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PrimeNG Fixture</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; }
+        .section { margin-bottom: 40px; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+        .section h2 { margin-top: 0; }
+
+        /* PrimeNG Dropdown Styles */
+        p-dropdown { display: inline-block; position: relative; }
+        .p-dropdown { display: flex; align-items: center; border: 1px solid #ced4da; border-radius: 4px; padding: 8px 12px; cursor: pointer; min-width: 200px; background: #fff; }
+        .p-dropdown-label { flex: 1; }
+        .p-dropdown-trigger { width: 20px; text-align: center; }
+        .p-dropdown-panel { position: absolute; top: 100%; left: 0; width: 100%; border: 1px solid #ced4da; border-radius: 4px; background: #fff; z-index: 1000; display: none; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .p-dropdown-panel.p-dropdown-panel-visible { display: block; }
+        .p-dropdown-items { list-style: none; padding: 0; margin: 0; max-height: 200px; overflow-y: auto; }
+        .p-dropdown-item { padding: 8px 12px; cursor: pointer; }
+        .p-dropdown-item:hover { background: #e9ecef; }
+        .p-dropdown-item.p-highlight { background: #007bff; color: #fff; }
+        .p-dropdown-filter { width: calc(100% - 16px); margin: 8px; padding: 6px; border: 1px solid #ced4da; border-radius: 4px; }
+
+        /* PrimeNG Autocomplete Styles */
+        p-autocomplete { display: inline-block; position: relative; }
+        .p-autocomplete { display: inline-flex; position: relative; }
+        .p-autocomplete-input { border: 1px solid #ced4da; border-radius: 4px; padding: 8px 12px; width: 250px; }
+        .p-autocomplete-panel { position: absolute; top: 100%; left: 0; width: 100%; border: 1px solid #ced4da; border-radius: 4px; background: #fff; z-index: 1000; display: none; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .p-autocomplete-panel.p-autocomplete-panel-visible { display: block; }
+        .p-autocomplete-items { list-style: none; padding: 0; margin: 0; }
+        .p-autocomplete-item { padding: 8px 12px; cursor: pointer; }
+        .p-autocomplete-item:hover { background: #e9ecef; }
+
+        /* PrimeNG Dialog Styles */
+        .p-dialog-mask { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 999; display: none; align-items: center; justify-content: center; }
+        .p-dialog-mask.p-dialog-mask-visible { display: flex; }
+        .p-dialog { background: #fff; border-radius: 8px; min-width: 400px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        .p-dialog-header { display: flex; align-items: center; padding: 16px 20px; border-bottom: 1px solid #dee2e6; }
+        .p-dialog-title { flex: 1; font-weight: 600; font-size: 18px; }
+        .p-dialog-header-close { background: none; border: none; cursor: pointer; font-size: 18px; padding: 4px 8px; }
+        .p-dialog-content { padding: 20px; }
+        .p-dialog-footer { padding: 12px 20px; border-top: 1px solid #dee2e6; text-align: right; }
+        .p-dialog-footer button { margin-left: 8px; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; }
+        .p-dialog-footer .p-button-primary { background: #007bff; color: #fff; }
+        .p-dialog-footer .p-button-secondary { background: #6c757d; color: #fff; }
+
+        /* PrimeNG Table Styles */
+        p-table { display: block; }
+        .p-datatable { border: 1px solid #dee2e6; border-radius: 4px; overflow: hidden; }
+        .p-datatable table { width: 100%; border-collapse: collapse; }
+        .p-datatable-thead th { background: #f8f9fa; padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; font-weight: 600; }
+        .p-datatable-tbody td { padding: 12px; border-bottom: 1px solid #dee2e6; }
+        .p-datatable-tbody tr:hover { background: #f1f3f5; }
+        .p-datatable-tbody tr.p-highlight { background: #cce5ff; }
+        .p-paginator { display: flex; align-items: center; justify-content: center; padding: 12px; gap: 4px; }
+        .p-paginator-page, .p-paginator-next, .p-paginator-prev { padding: 6px 12px; border: 1px solid #dee2e6; border-radius: 4px; cursor: pointer; background: #fff; }
+        .p-paginator-page.p-highlight { background: #007bff; color: #fff; border-color: #007bff; }
+        .p-paginator-next:disabled, .p-paginator-prev:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        #result { margin-top: 10px; padding: 8px; background: #f0f0f0; border-radius: 4px; min-height: 20px; }
+    </style>
+</head>
+<body>
+
+<!-- ==================== DROPDOWN SECTION ==================== -->
+<div class="section" id="dropdown-section">
+    <h2>PrimeNG Dropdown</h2>
+    <p-dropdown class="p-component p-dropdown" id="country-dropdown">
+        <div class="p-dropdown" onclick="toggleDropdown(this)">
+            <span class="p-dropdown-label" id="dropdown-label">Select a Country</span>
+            <span class="p-dropdown-trigger">▼</span>
+        </div>
+        <div class="p-dropdown-panel" id="dropdown-panel">
+            <ul class="p-dropdown-items">
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">India</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">United States</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Germany</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Japan</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Australia</li>
+            </ul>
+        </div>
+    </p-dropdown>
+
+    <br><br>
+
+    <p-dropdown class="p-component p-dropdown" id="searchable-dropdown">
+        <div class="p-dropdown" onclick="toggleDropdown(this)">
+            <span class="p-dropdown-label" id="searchable-dropdown-label">Select a City</span>
+            <span class="p-dropdown-trigger">▼</span>
+        </div>
+        <div class="p-dropdown-panel" id="searchable-dropdown-panel">
+            <input class="p-dropdown-filter p-inputtext" type="text" placeholder="Search..." oninput="filterDropdown(this)">
+            <ul class="p-dropdown-items" id="searchable-dropdown-items">
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Mumbai</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">New York</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Berlin</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Tokyo</li>
+                <li class="p-dropdown-item" onclick="selectDropdownItem(this)">Sydney</li>
+            </ul>
+        </div>
+    </p-dropdown>
+</div>
+
+<!-- ==================== AUTOCOMPLETE SECTION ==================== -->
+<div class="section" id="autocomplete-section">
+    <h2>PrimeNG Autocomplete</h2>
+    <p-autocomplete class="p-component p-autocomplete" id="language-autocomplete">
+        <div class="p-autocomplete">
+            <input class="p-autocomplete-input p-inputtext p-component" type="text" id="autocomplete-input"
+                   placeholder="Search language..." oninput="handleAutocomplete(this)">
+        </div>
+        <div class="p-autocomplete-panel" id="autocomplete-panel">
+            <ul class="p-autocomplete-items" id="autocomplete-items"></ul>
+        </div>
+    </p-autocomplete>
+</div>
+
+<!-- ==================== DIALOG SECTION ==================== -->
+<div class="section" id="dialog-section">
+    <h2>PrimeNG Dialog</h2>
+    <button onclick="openDialog()" id="open-dialog-btn">Open Dialog</button>
+    <div id="result"></div>
+</div>
+
+<div class="p-dialog-mask" id="dialog-mask">
+    <p-dialog class="p-component">
+        <div class="p-dialog" id="main-dialog">
+            <div class="p-dialog-header">
+                <span class="p-dialog-title">Confirm Action</span>
+                <button class="p-dialog-header-close" onclick="closeDialog()">✕</button>
+            </div>
+            <div class="p-dialog-content">
+                <p>Are you sure you want to proceed with this operation?</p>
+            </div>
+            <div class="p-dialog-footer">
+                <button class="p-button-secondary" onclick="dialogAction('Cancel')">Cancel</button>
+                <button class="p-button-primary" onclick="dialogAction('Confirm')">Confirm</button>
+            </div>
+        </div>
+    </p-dialog>
+</div>
+
+<!-- ==================== TABLE SECTION ==================== -->
+<div class="section" id="table-section">
+    <h2>PrimeNG Table</h2>
+    <p-table class="p-component p-datatable" id="data-table">
+        <div class="p-datatable">
+            <table>
+                <thead class="p-datatable-thead">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Company</th>
+                    </tr>
+                </thead>
+                <tbody class="p-datatable-tbody" id="table-body">
+                    <tr onclick="selectRow(this)"><td>1</td><td>James Butt</td><td>Algeria</td><td>Benton</td></tr>
+                    <tr onclick="selectRow(this)"><td>2</td><td>Josephine Darakjy</td><td>Egypt</td><td>Chanay</td></tr>
+                    <tr onclick="selectRow(this)"><td>3</td><td>Art Venere</td><td>Panama</td><td>Chemel</td></tr>
+                    <tr onclick="selectRow(this)"><td>4</td><td>Lenna Paprocki</td><td>Slovenia</td><td>Feltz</td></tr>
+                    <tr onclick="selectRow(this)"><td>5</td><td>Donette Foller</td><td>South Africa</td><td>Printing</td></tr>
+                    <tr onclick="selectRow(this)"><td>6</td><td>Simona Morasca</td><td>Egypt</td><td>Chapman</td></tr>
+                    <tr onclick="selectRow(this)"><td>7</td><td>Mitsue Tollner</td><td>Paraguay</td><td>Morlong</td></tr>
+                    <tr onclick="selectRow(this)"><td>8</td><td>Leota Dilliard</td><td>Serbia</td><td>Commercial</td></tr>
+                    <tr onclick="selectRow(this)"><td>9</td><td>Sage Wieser</td><td>Egypt</td><td>Truhlar</td></tr>
+                    <tr onclick="selectRow(this)"><td>10</td><td>Kris Marrier</td><td>Mexico</td><td>King</td></tr>
+                </tbody>
+            </table>
+            <div class="p-paginator" id="paginator">
+                <button class="p-paginator-prev" onclick="prevPage()" id="prev-btn" disabled>‹</button>
+                <button class="p-paginator-page p-highlight" onclick="goToPage(1)">1</button>
+                <button class="p-paginator-page" onclick="goToPage(2)">2</button>
+                <button class="p-paginator-page" onclick="goToPage(3)">3</button>
+                <button class="p-paginator-next" onclick="nextPage()" id="next-btn">›</button>
+            </div>
+        </div>
+    </p-table>
+</div>
+
+<script>
+    // ==================== DROPDOWN LOGIC ====================
+    function toggleDropdown(trigger) {
+        var panel = trigger.nextElementSibling;
+        var isVisible = panel.classList.contains('p-dropdown-panel-visible');
+        // Close all panels first
+        document.querySelectorAll('.p-dropdown-panel').forEach(function(p) {
+            p.classList.remove('p-dropdown-panel-visible');
+        });
+        if (!isVisible) {
+            panel.classList.add('p-dropdown-panel-visible');
+        }
+    }
+
+    function selectDropdownItem(item) {
+        var panel = item.closest('.p-dropdown-panel');
+        var label = panel.previousElementSibling.querySelector('.p-dropdown-label');
+        // Remove highlight from all items
+        panel.querySelectorAll('.p-dropdown-item').forEach(function(i) { i.classList.remove('p-highlight'); });
+        item.classList.add('p-highlight');
+        label.textContent = item.textContent;
+        panel.classList.remove('p-dropdown-panel-visible');
+    }
+
+    function filterDropdown(input) {
+        var items = input.parentElement.querySelectorAll('.p-dropdown-item');
+        var filter = input.value.toLowerCase();
+        items.forEach(function(item) {
+            item.style.display = item.textContent.toLowerCase().includes(filter) ? '' : 'none';
+        });
+    }
+
+    // Close dropdown on outside click
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('p-dropdown')) {
+            document.querySelectorAll('.p-dropdown-panel').forEach(function(p) {
+                p.classList.remove('p-dropdown-panel-visible');
+            });
+        }
+    });
+
+    // ==================== AUTOCOMPLETE LOGIC ====================
+    var languages = ['JavaScript', 'Java', 'Python', 'TypeScript', 'C#', 'C++', 'Ruby', 'Go', 'Rust', 'Kotlin', 'Swift', 'PHP'];
+
+    function handleAutocomplete(input) {
+        var panel = document.getElementById('autocomplete-panel');
+        var itemsList = document.getElementById('autocomplete-items');
+        var query = input.value.toLowerCase();
+
+        if (query.length < 1) {
+            panel.classList.remove('p-autocomplete-panel-visible');
+            return;
+        }
+
+        var matches = languages.filter(function(lang) {
+            return lang.toLowerCase().includes(query);
+        });
+
+        itemsList.innerHTML = '';
+        matches.forEach(function(match) {
+            var li = document.createElement('li');
+            li.className = 'p-autocomplete-item';
+            li.textContent = match;
+            li.onclick = function() { selectAutocompleteItem(li); };
+            itemsList.appendChild(li);
+        });
+
+        if (matches.length > 0) {
+            panel.classList.add('p-autocomplete-panel-visible');
+        } else {
+            panel.classList.remove('p-autocomplete-panel-visible');
+        }
+    }
+
+    function selectAutocompleteItem(item) {
+        var input = document.getElementById('autocomplete-input');
+        input.value = item.textContent;
+        document.getElementById('autocomplete-panel').classList.remove('p-autocomplete-panel-visible');
+    }
+
+    // ==================== DIALOG LOGIC ====================
+    function openDialog() {
+        document.getElementById('dialog-mask').classList.add('p-dialog-mask-visible');
+    }
+
+    function closeDialog() {
+        document.getElementById('dialog-mask').classList.remove('p-dialog-mask-visible');
+    }
+
+    function dialogAction(action) {
+        document.getElementById('result').textContent = action === 'Confirm' ? 'Action confirmed!' : 'Action cancelled.';
+        closeDialog();
+    }
+
+    // ESC key closes dialog
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeDialog();
+            // Also close autocomplete
+            document.getElementById('autocomplete-panel').classList.remove('p-autocomplete-panel-visible');
+        }
+    });
+
+    // ==================== TABLE LOGIC ====================
+    var allData = [
+        ['1','James Butt','Algeria','Benton'],['2','Josephine Darakjy','Egypt','Chanay'],
+        ['3','Art Venere','Panama','Chemel'],['4','Lenna Paprocki','Slovenia','Feltz'],
+        ['5','Donette Foller','South Africa','Printing'],['6','Simona Morasca','Egypt','Chapman'],
+        ['7','Mitsue Tollner','Paraguay','Morlong'],['8','Leota Dilliard','Serbia','Commercial'],
+        ['9','Sage Wieser','Egypt','Truhlar'],['10','Kris Marrier','Mexico','King'],
+        ['11','Minna Amigon','Romania','Buzzworks'],['12','Abel Maclead','Singapore','Consumers'],
+        ['13','Kiley Caldarera','Serbia','Feiner'],['14','Graciela Ruta','Australia','Buckley'],
+        ['15','Cammy Albares','Philippines','Rousseaux'],['16','Mattie Poquette','Venezuela','Century'],
+        ['17','Meaghan Garufi','Malaysia','Bolton'],['18','Gladys Rim','Netherlands','Politan'],
+        ['19','Yuki Whobrey','Israel','Farmers'],['20','Fletcher Flosi','Uruguay','Post'],
+        ['21','Bette Nicka','Paraguay','Sport'],['22','Veronika Inouye','China','Hyatt'],
+        ['23','Willard Kolmetz','Tunisia','Ingalls'],['24','Maryann Royster','Belarus','Franklin'],
+        ['25','Alisha Slusarski','Iceland','Weil'],['26','Allene Iturbide','Italy','Ledecky'],
+        ['27','Chanel Caudy','Argentina','Professional'],['28','Ezekiel Chui','Bolivia','Sider'],
+        ['29','Willow Kusko','Romania','U-Haul'],['30','Bernardo Figeroa','Israel','Clark']
+    ];
+    var pageSize = 10;
+    var currentPage = 1;
+    var totalPages = Math.ceil(allData.length / pageSize);
+
+    function renderTable() {
+        var tbody = document.getElementById('table-body');
+        tbody.innerHTML = '';
+        var start = (currentPage - 1) * pageSize;
+        var end = Math.min(start + pageSize, allData.length);
+        for (var i = start; i < end; i++) {
+            var tr = document.createElement('tr');
+            tr.onclick = function() { selectRow(this); };
+            allData[i].forEach(function(cell) {
+                var td = document.createElement('td');
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        }
+        updatePaginator();
+    }
+
+    function updatePaginator() {
+        document.getElementById('prev-btn').disabled = (currentPage === 1);
+        document.getElementById('next-btn').disabled = (currentPage === totalPages);
+        document.querySelectorAll('.p-paginator-page').forEach(function(btn) {
+            btn.classList.toggle('p-highlight', parseInt(btn.textContent) === currentPage);
+        });
+    }
+
+    function goToPage(page) {
+        currentPage = page;
+        renderTable();
+    }
+
+    function nextPage() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+        }
+    }
+
+    function selectRow(row) {
+        document.querySelectorAll('#table-body tr').forEach(function(r) { r.classList.remove('p-highlight'); });
+        row.classList.add('p-highlight');
+    }
+</script>
+</body>
+</html>

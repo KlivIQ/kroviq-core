@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Material Test Fixture</title>
+    <style>
+        body { font-family: Roboto, sans-serif; padding: 20px; }
+        .section { margin: 30px 0; padding: 20px; border: 1px solid #ddd; }
+        .section h2 { margin-top: 0; }
+
+        /* mat-select simulation */
+        mat-select { display: inline-block; padding: 8px 16px; border: 1px solid #ccc; cursor: pointer; min-width: 200px; }
+        mat-select .mat-mdc-select-trigger { display: flex; align-items: center; }
+        mat-select .mat-mdc-select-value { flex: 1; }
+        mat-select .mat-mdc-select-arrow-wrapper { margin-left: 8px; }
+
+        /* CDK overlay */
+        .cdk-overlay-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1000; }
+        .cdk-overlay-container .cdk-overlay-pane { pointer-events: auto; position: absolute; }
+        .mat-mdc-select-panel { background: white; border: 1px solid #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: none; position: absolute; min-width: 200px; }
+        .mat-mdc-select-panel.visible { display: block; }
+        mat-option { display: block; padding: 8px 16px; cursor: pointer; }
+        mat-option:hover { background: #f0f0f0; }
+        mat-option.mat-mdc-option-active { background: #e0e0e0; }
+
+        /* mat-autocomplete simulation */
+        .mat-mdc-autocomplete-panel { background: white; border: 1px solid #ccc; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: none; position: absolute; min-width: 200px; }
+        .mat-mdc-autocomplete-panel.visible { display: block; }
+        .mat-mdc-form-field input { padding: 8px; border: 1px solid #ccc; width: 200px; }
+
+        /* mat-dialog simulation */
+        mat-dialog-container { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0,0,0,0.3); padding: 0; min-width: 300px; z-index: 2000; }
+        mat-dialog-container.visible { display: block; }
+        mat-dialog-content, [mat-dialog-content] { padding: 20px; }
+        mat-dialog-actions, [mat-dialog-actions] { padding: 10px 20px; display: flex; gap: 8px; justify-content: flex-end; }
+        .cdk-overlay-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1999; }
+        .cdk-overlay-backdrop.visible { display: block; }
+
+        /* mat-table simulation */
+        table.mat-mdc-table { width: 100%; border-collapse: collapse; }
+        table.mat-mdc-table th.mat-mdc-header-cell { padding: 8px 16px; text-align: left; border-bottom: 2px solid #ddd; font-weight: 500; }
+        table.mat-mdc-table td.mat-mdc-cell { padding: 8px 16px; border-bottom: 1px solid #eee; }
+        table.mat-mdc-table tr.mat-mdc-row:hover { background: #f5f5f5; }
+        table.mat-mdc-table tr.mat-mdc-row.selected { background: #e3f2fd; }
+
+        button { padding: 8px 16px; cursor: pointer; border: 1px solid #ccc; background: #f5f5f5; }
+        button:hover { background: #e0e0e0; }
+    </style>
+</head>
+<body>
+
+<!-- ==================== SELECT / DROPDOWN ==================== -->
+<div class="section" id="select-section">
+    <h2>mat-select</h2>
+    <mat-select id="test-select" class="mat-mdc-select" role="combobox" aria-expanded="false">
+        <div class="mat-mdc-select-trigger" onclick="toggleSelect()">
+            <div class="mat-mdc-select-value" id="select-value">Select a fruit</div>
+            <div class="mat-mdc-select-arrow-wrapper">▼</div>
+        </div>
+    </mat-select>
+</div>
+
+<div class="cdk-overlay-container" id="overlay-container">
+    <div class="cdk-overlay-pane">
+        <div class="mat-mdc-select-panel" id="select-panel" role="listbox">
+            <mat-option class="mat-mdc-option" role="option" onclick="selectOption(this)">Apple</mat-option>
+            <mat-option class="mat-mdc-option" role="option" onclick="selectOption(this)">Banana</mat-option>
+            <mat-option class="mat-mdc-option" role="option" onclick="selectOption(this)">Cherry</mat-option>
+            <mat-option class="mat-mdc-option" role="option" onclick="selectOption(this)">Dragonfruit</mat-option>
+            <mat-option class="mat-mdc-option" role="option" onclick="selectOption(this)">Elderberry</mat-option>
+        </div>
+
+        <!-- Autocomplete panel -->
+        <div class="mat-mdc-autocomplete-panel" id="autocomplete-panel" role="listbox">
+        </div>
+    </div>
+</div>
+
+<!-- ==================== AUTOCOMPLETE ==================== -->
+<div class="section" id="autocomplete-section">
+    <h2>mat-autocomplete</h2>
+    <div class="mat-mdc-form-field">
+        <input id="test-autocomplete" type="text" matInput matAutocomplete="auto"
+               aria-autocomplete="list" placeholder="Search states..."
+               oninput="filterAutocomplete(this.value)" onfocus="filterAutocomplete(this.value)">
+    </div>
+</div>
+
+<!-- ==================== DIALOG ==================== -->
+<div class="section" id="dialog-section">
+    <h2>mat-dialog</h2>
+    <button id="open-dialog-btn" onclick="openDialog()">Open Dialog</button>
+</div>
+
+<div class="cdk-overlay-backdrop" id="dialog-backdrop" onclick="closeDialog()"></div>
+<mat-dialog-container id="test-dialog" class="mat-mdc-dialog-container">
+    <div mat-dialog-content class="mat-mdc-dialog-content">
+        <h3>Confirm Action</h3>
+        <p>Are you sure you want to proceed with this operation?</p>
+    </div>
+    <div mat-dialog-actions class="mat-mdc-dialog-actions">
+        <button onclick="closeDialog()">Cancel</button>
+        <button id="confirm-btn" onclick="confirmDialog()">Confirm</button>
+    </div>
+</mat-dialog-container>
+
+<!-- ==================== TABLE ==================== -->
+<div class="section" id="table-section">
+    <h2>mat-table</h2>
+    <table mat-table class="mat-mdc-table" id="test-table">
+        <tr class="mat-mdc-header-row" mat-header-row>
+            <th class="mat-mdc-header-cell" mat-header-cell>No.</th>
+            <th class="mat-mdc-header-cell" mat-header-cell>Name</th>
+            <th class="mat-mdc-header-cell" mat-header-cell>Weight</th>
+            <th class="mat-mdc-header-cell" mat-header-cell>Symbol</th>
+        </tr>
+        <tr class="mat-mdc-row" mat-row onclick="selectRow(this)">
+            <td class="mat-mdc-cell" mat-cell>1</td>
+            <td class="mat-mdc-cell" mat-cell>Hydrogen</td>
+            <td class="mat-mdc-cell" mat-cell>1.0079</td>
+            <td class="mat-mdc-cell" mat-cell>H</td>
+        </tr>
+        <tr class="mat-mdc-row" mat-row onclick="selectRow(this)">
+            <td class="mat-mdc-cell" mat-cell>2</td>
+            <td class="mat-mdc-cell" mat-cell>Helium</td>
+            <td class="mat-mdc-cell" mat-cell>4.0026</td>
+            <td class="mat-mdc-cell" mat-cell>He</td>
+        </tr>
+        <tr class="mat-mdc-row" mat-row onclick="selectRow(this)">
+            <td class="mat-mdc-cell" mat-cell>3</td>
+            <td class="mat-mdc-cell" mat-cell>Lithium</td>
+            <td class="mat-mdc-cell" mat-cell>6.941</td>
+            <td class="mat-mdc-cell" mat-cell>Li</td>
+        </tr>
+        <tr class="mat-mdc-row" mat-row onclick="selectRow(this)">
+            <td class="mat-mdc-cell" mat-cell>4</td>
+            <td class="mat-mdc-cell" mat-cell>Beryllium</td>
+            <td class="mat-mdc-cell" mat-cell>9.0122</td>
+            <td class="mat-mdc-cell" mat-cell>Be</td>
+        </tr>
+        <tr class="mat-mdc-row" mat-row onclick="selectRow(this)">
+            <td class="mat-mdc-cell" mat-cell>5</td>
+            <td class="mat-mdc-cell" mat-cell>Boron</td>
+            <td class="mat-mdc-cell" mat-cell>10.811</td>
+            <td class="mat-mdc-cell" mat-cell>B</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    // ==================== SELECT LOGIC ====================
+    function toggleSelect() {
+        var panel = document.getElementById('select-panel');
+        var select = document.getElementById('test-select');
+        if (panel.classList.contains('visible')) {
+            panel.classList.remove('visible');
+            select.setAttribute('aria-expanded', 'false');
+        } else {
+            panel.classList.add('visible');
+            select.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    function selectOption(opt) {
+        document.getElementById('select-value').textContent = opt.textContent.trim();
+        document.getElementById('select-panel').classList.remove('visible');
+        document.getElementById('test-select').setAttribute('aria-expanded', 'false');
+    }
+
+    // Close select on Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.getElementById('select-panel').classList.remove('visible');
+            document.getElementById('test-select').setAttribute('aria-expanded', 'false');
+            document.getElementById('autocomplete-panel').classList.remove('visible');
+            closeDialog();
+        }
+    });
+
+    // ==================== AUTOCOMPLETE LOGIC ====================
+    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+                  'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho',
+                  'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana'];
+
+    function filterAutocomplete(value) {
+        var panel = document.getElementById('autocomplete-panel');
+        panel.innerHTML = '';
+        if (!value) {
+            panel.classList.remove('visible');
+            return;
+        }
+        var filtered = states.filter(function(s) {
+            return s.toLowerCase().indexOf(value.toLowerCase()) >= 0;
+        });
+        if (filtered.length === 0) {
+            panel.classList.remove('visible');
+            return;
+        }
+        filtered.forEach(function(state) {
+            var opt = document.createElement('mat-option');
+            opt.className = 'mat-mdc-option';
+            opt.setAttribute('role', 'option');
+            opt.textContent = state;
+            opt.onclick = function() {
+                document.getElementById('test-autocomplete').value = state;
+                panel.classList.remove('visible');
+            };
+            panel.appendChild(opt);
+        });
+        panel.classList.add('visible');
+    }
+
+    // ==================== DIALOG LOGIC ====================
+    function openDialog() {
+        document.getElementById('test-dialog').classList.add('visible');
+        document.getElementById('dialog-backdrop').classList.add('visible');
+    }
+
+    function closeDialog() {
+        document.getElementById('test-dialog').classList.remove('visible');
+        document.getElementById('dialog-backdrop').classList.remove('visible');
+    }
+
+    function confirmDialog() {
+        document.getElementById('dialog-section').innerHTML += '<p id="dialog-result">Action confirmed!</p>';
+        closeDialog();
+    }
+
+    // ==================== TABLE LOGIC ====================
+    function selectRow(row) {
+        var rows = document.querySelectorAll('.mat-mdc-row');
+        rows.forEach(function(r) { r.classList.remove('selected'); });
+        row.classList.add('selected');
+    }
+</script>
+</body>
+</html>
