@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kroviq — Write Once. Run Across Technologies. Open-source multi-technology automation framework.">
+<meta name="author" content="Kroviq by KlivIQ Technologies">
+<title>Kroviq — Product Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── Variables ─────────────────────────────────────────────── */
+:root {
+  --color-primary: #764224;
+  --color-primary-light: #8B5232;
+  --color-primary-subtle: rgba(118, 66, 36, 0.08);
+  --color-dark: #0f0f0f;
+  --color-surface: #fbfaf7;
+  --color-card: #ffffff;
+  --color-border: #f0ede8;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #6b6560;
+  --color-text-muted: #9c9691;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-elevated: 0 4px 12px rgba(0,0,0,0.08);
+  --transition: 150ms cubic-bezier(0.2, 0, 0, 1);
+  --max-width: 1120px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--color-primary-light); }
+img { max-width: 100%; display: block; }
+
+/* ─── Layout ────────────────────────────────────────────────── */
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+section:nth-child(even):not(.hero) { background: var(--color-card); }
+
+/* ─── Typography ────────────────────────────────────────────── */
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.02em; color: var(--color-dark); }
+h1 { font-size: 2.75rem; line-height: 1.15; }
+h2 { font-size: 1.75rem; line-height: 1.3; margin-bottom: 16px; }
+h3 { font-size: 1.125rem; line-height: 1.4; margin-bottom: 8px; }
+p { color: var(--color-text-secondary); }
+
+/* ─── Navigation ────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+.nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo {
+  width: 28px; height: 28px;
+  background: var(--color-primary);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: #fff;
+}
+.nav-brand-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: #ffffff; }
+.nav-cta {
+  padding: 6px 14px;
+  background: var(--color-primary);
+  color: #fff !important;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 0.8125rem;
+}
+.nav-cta:hover { background: var(--color-primary-light); color: #fff !important; }
+.nav-toggle { display: none; cursor: pointer; }
+.nav-toggle span {
+  display: block;
+  width: 20px; height: 2px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 1px;
+  transition: var(--transition);
+}
+
+/* ─── Hero ──────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  background: var(--color-dark);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(118,66,36,0.06) 0%, transparent 60%);
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+@keyframes heroGlow {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.1) translate(2%, -2%); }
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: rgba(118,66,36,0.15);
+  border: 1px solid rgba(118,66,36,0.3);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #c4845e;
+  margin-bottom: 28px;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+.hero h1 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.hero h1 span {
+  background: linear-gradient(135deg, #c4845e, #764224);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+.btn-primary:hover { background: var(--color-primary-light); color: #ffffff; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.4); color: #ffffff; transform: translateY(-1px); }
+.hero-version {
+  margin-top: 48px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── Scroll Animations ─────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Section Header ────────────────────────────────────────── */
+.section-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+.section-header p {
+  margin-top: 8px;
+  font-size: 1rem;
+}
+.section-label {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+/* ─── Staggered Grid Animations ─────────────────────────────── */
+.fade-in.visible .value-card,
+.fade-in.visible .product-card,
+.fade-in.visible .ai-card,
+.fade-in.visible .feature-card,
+.fade-in.visible .pricing-card,
+.fade-in.visible .arch-layer {
+  animation: staggerFadeIn 0.5s ease forwards;
+  opacity: 0;
+}
+.fade-in.visible .value-card:nth-child(1), .fade-in.visible .product-card:nth-child(1), .fade-in.visible .ai-card:nth-child(1), .fade-in.visible .feature-card:nth-child(1), .fade-in.visible .pricing-card:nth-child(1), .fade-in.visible .arch-layer:nth-child(1) { animation-delay: 0ms; }
+.fade-in.visible .value-card:nth-child(2), .fade-in.visible .product-card:nth-child(2), .fade-in.visible .ai-card:nth-child(2), .fade-in.visible .feature-card:nth-child(2), .fade-in.visible .pricing-card:nth-child(2), .fade-in.visible .arch-layer:nth-child(2) { animation-delay: 80ms; }
+.fade-in.visible .value-card:nth-child(3), .fade-in.visible .product-card:nth-child(3), .fade-in.visible .ai-card:nth-child(3), .fade-in.visible .feature-card:nth-child(3), .fade-in.visible .pricing-card:nth-child(3), .fade-in.visible .arch-layer:nth-child(3) { animation-delay: 160ms; }
+.fade-in.visible .value-card:nth-child(4), .fade-in.visible .feature-card:nth-child(4), .fade-in.visible .arch-layer:nth-child(4) { animation-delay: 240ms; }
+.fade-in.visible .feature-card:nth-child(5), .fade-in.visible .arch-layer:nth-child(5) { animation-delay: 320ms; }
+.fade-in.visible .feature-card:nth-child(6), .fade-in.visible .arch-layer:nth-child(6) { animation-delay: 400ms; }
+.fade-in.visible .feature-card:nth-child(7) { animation-delay: 480ms; }
+.fade-in.visible .feature-card:nth-child(8) { animation-delay: 560ms; }
+.fade-in.visible .feature-card:nth-child(9) { animation-delay: 640ms; }
+.fade-in.visible .feature-card:nth-child(10) { animation-delay: 720ms; }
+.fade-in.visible .feature-card:nth-child(11) { animation-delay: 800ms; }
+.fade-in.visible .feature-card:nth-child(12) { animation-delay: 880ms; }
+
+@keyframes staggerFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Active Nav Link ───────────────────────────────────────── */
+.nav-links a.active { color: #ffffff; }
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  section { padding: 60px 0; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0; right: 0;
+    background: rgba(15,15,15,0.98);
+    flex-direction: column;
+    padding: 16px 24px;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  .hero { min-height: auto; padding: 100px 24px 60px; }
+  .hero-subtitle { font-size: 1rem; }
+}
+@media (max-width: 480px) {
+  h1 { font-size: 1.75rem; }
+  .hero-actions { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+}
+
+
+/* ─── Platform Diagram ──────────────────────────────────────── */
+.platform-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  max-width: 560px;
+  margin: 0 auto 56px;
+}
+.platform-tier {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.platform-tier:hover {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-2px);
+}
+.tier-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-primary-subtle);
+  border-radius: var(--radius-md);
+}
+.tier-content h3 { margin-bottom: 4px; }
+.tier-content p { font-size: 0.8125rem; line-height: 1.5; margin-bottom: 8px; }
+.tier-tag {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+.platform-connector {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--color-border), var(--color-primary), var(--color-border));
+}
+
+/* ─── Value Grid ────────────────────────────────────────────── */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.value-card {
+  text-align: center;
+  padding: 28px 16px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.value-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+.value-text {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .value-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .value-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Products Grid ─────────────────────────────────────────── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.product-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.product-card:hover {
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-3px);
+}
+.product-card.featured {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary), var(--shadow-card);
+}
+.product-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.product-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: #fff;
+}
+.product-card-header.core .product-icon { background: #2e7d32; }
+.product-card-header.studio .product-icon { background: var(--color-primary); }
+.product-card-header.enterprise .product-icon { background: #1565c0; }
+.product-badge {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+}
+.product-desc {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.product-features {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.product-features li {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  padding: 5px 0;
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.4;
+}
+.product-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  opacity: 0.5;
+}
+.product-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+.product-version {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .products-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+}
+
+/* ─── AI Grid ──────────────────────────────────────────────── */
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.ai-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.ai-card:hover { box-shadow: var(--shadow-elevated); transform: translateY(-2px); }
+.ai-card-icon { font-size: 1.75rem; margin-bottom: 12px; }
+.ai-card h3 { margin-bottom: 8px; }
+.ai-card p { font-size: 0.8125rem; line-height: 1.5; margin-bottom: 14px; }
+.ai-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ai-tag {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+  border-radius: 12px;
+}
+
+/* ─── Architecture Diagram ─────────────────────────────────── */
+.arch-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.arch-layer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+}
+.arch-layer-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  min-width: 130px;
+  flex-shrink: 0;
+}
+.arch-layer-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.arch-layer-items span {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  padding: 3px 10px;
+  border-radius: 3px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+.layer-top { border-left: 3px solid #7c4dff; }
+.layer-reporting { border-left: 3px solid #ff7043; }
+.layer-engine { border-left: 3px solid var(--color-primary); }
+.layer-wrapper { border-left: 3px solid #26a69a; }
+.layer-interaction { border-left: 3px solid #42a5f5; }
+.layer-execution { border-left: 3px solid #66bb6a; }
+
+/* ─── Workflow ─────────────────────────────────────────────── */
+.workflow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.workflow-step {
+  text-align: center;
+  max-width: 130px;
+}
+.workflow-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px;
+}
+.workflow-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 4px;
+}
+.workflow-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+.workflow-arrow {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  margin: 8px 8px 0;
+}
+
+/* ─── Features Grid ─────────────────────────────────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.feature-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.feature-card:hover { box-shadow: var(--shadow-elevated); transform: translateY(-2px); }
+.feature-icon { font-size: 1.5rem; margin-bottom: 12px; }
+.feature-card h3 { font-size: 0.875rem; margin-bottom: 6px; }
+.feature-card p { font-size: 0.75rem; line-height: 1.5; }
+
+@media (max-width: 768px) {
+  .ai-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .workflow { gap: 8px; }
+  .workflow-arrow { display: none; }
+  .workflow-step { max-width: 100px; }
+  .arch-layer { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .arch-layer-label { min-width: auto; }
+}
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── Technology Tables ─────────────────────────────────────── */
+.tech-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.tech-block {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+.tech-block h3 { margin-bottom: 16px; }
+.tech-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+.tech-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tech-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+.tech-table td:first-child {
+  font-weight: 500;
+  color: var(--color-text);
+}
+.tech-table td:nth-child(2) {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-primary);
+}
+.tech-table tbody tr:last-child td { border-bottom: none; }
+
+/* ─── Folder Structure ─────────────────────────────────────── */
+.structure-block {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.code-tree {
+  background: #1e1e1e;
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.9;
+  color: #d4d4d4;
+  overflow-x: auto;
+  margin: 0;
+}
+.tree-comment {
+  color: #6a9955;
+}
+
+@media (max-width: 768px) {
+  .tech-columns { grid-template-columns: 1fr; }
+}
+
+/* ─── Editions Table ───────────────────────────────────────── */
+.editions-table-wrap {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: 48px;
+}
+.editions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  min-width: 600px;
+}
+.editions-table th {
+  padding: 16px 20px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-dark);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.editions-table th:first-child { text-align: left; }
+.edition-sub {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+.editions-table td {
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+.editions-table td:first-child { text-align: left; font-weight: 500; color: var(--color-text); }
+.editions-table td.check { color: var(--color-primary); font-weight: 600; font-size: 1rem; }
+.editions-table td.dash { color: var(--color-text-muted); }
+.editions-table tbody tr:last-child td { border-bottom: none; }
+
+/* ─── Pricing Cards ────────────────────────────────────────── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pricing-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.pricing-card:hover { box-shadow: var(--shadow-elevated); transform: translateY(-2px); }
+.pricing-card.featured { border-color: var(--color-primary); box-shadow: 0 0 0 1px var(--color-primary); }
+.pricing-tier {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.pricing-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+.pricing-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* ─── Timeline ─────────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-marker {
+  position: absolute;
+  left: -32px;
+  top: 4px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+}
+.timeline-item.completed .timeline-marker {
+  background: #2e7d32;
+  border-color: #2e7d32;
+}
+.timeline-item.active .timeline-marker {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-primary-subtle);
+}
+.timeline-item.upcoming .timeline-marker {
+  background: var(--color-card);
+  border-color: var(--color-text-muted);
+}
+.timeline-date {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.timeline-content h3 { margin: 4px 0; font-size: 1rem; }
+.timeline-content p { font-size: 0.8125rem; line-height: 1.5; }
+
+/* ─── FAQ Accordion ────────────────────────────────────────── */
+.faq-list {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+}
+.faq-icon {
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  transition: transform var(--transition);
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 200px;
+  padding-bottom: 18px;
+}
+.faq-answer p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.faq-answer code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  background: var(--color-primary-subtle);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--color-primary);
+}
+
+/* ─── Footer ──────────────────────────────────────────────── */
+.site-footer {
+  background: var(--color-dark);
+  padding: 64px 24px 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.footer-links h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+}
+.footer-links a {
+  display: block;
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.4);
+  padding: 4px 0;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: #ffffff; }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-bottom p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Navigation ──────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-brand">
+      <div class="nav-logo">K</div>
+      <span class="nav-brand-text">Kroviq</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#technology">Technology</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://github.com" class="nav-cta">GitHub</a></li>
+    </ul>
+    <div class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── Hero ────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Open Source Framework</div>
+    <h1>Write Once.<br>Run Across <span>Technologies.</span></h1>
+    <p class="hero-subtitle">
+      Kroviq is an enterprise-grade, multi-technology test automation platform.<br>
+      One framework. Six UI technologies. Zero vendor lock-in.
+    </p>
+    <div class="hero-actions">
+      <a href="#platform" class="btn btn-primary">Explore Platform</a>
+      <a href="docs/Kroviq_QuickStart_Guide.md" class="btn btn-outline">User Guide</a>
+    </div>
+    <div class="hero-version">Kroviq Core v2.5.9 · Kroviq Studio v1.2 · Java 17 · Selenium 4</div>
+  </div>
+</section>
+
+<!-- ─── Sections (to be populated in subtasks 2–8) ──────────── -->
+<section id="platform"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Platform</span>
+    <h2>What is Kroviq?</h2>
+    <p>Kroviq is a complete test automation ecosystem — from open-source framework to enterprise platform. Build once, execute everywhere, across any UI technology.</p>
+  </div>
+
+  <div class="platform-diagram fade-in">
+    <div class="platform-tier tier-core">
+      <div class="tier-icon">⚙️</div>
+      <div class="tier-content">
+        <h3>Kroviq Core</h3>
+        <p>Open-source automation framework. Selenium + Cucumber + 6 UI frameworks. The engine that powers everything.</p>
+        <span class="tier-tag">Open Source · v2.5.9</span>
+      </div>
+    </div>
+    <div class="platform-connector"></div>
+    <div class="platform-tier tier-studio">
+      <div class="tier-icon">🎨</div>
+      <div class="tier-content">
+        <h3>Kroviq Studio</h3>
+        <p>Low-code visual platform. Design tests, manage objects, execute and monitor — without writing code.</p>
+        <span class="tier-tag">Low-Code · v1.2</span>
+      </div>
+    </div>
+    <div class="platform-connector"></div>
+    <div class="platform-tier tier-enterprise">
+      <div class="tier-icon">🏢</div>
+      <div class="tier-content">
+        <h3>Kroviq Enterprise</h3>
+        <p>Advanced commercial capabilities. Cloud execution, team collaboration, analytics dashboards, and CI/CD integration.</p>
+        <span class="tier-tag">Commercial · Planned</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="value-grid fade-in">
+    <div class="value-card">
+      <div class="value-number">6</div>
+      <div class="value-text">UI frameworks supported out of the box</div>
+    </div>
+    <div class="value-card">
+      <div class="value-number">400+</div>
+      <div class="value-text">Unit tests validating framework stability</div>
+    </div>
+    <div class="value-card">
+      <div class="value-number">0</div>
+      <div class="value-text">Vendor lock-in. Pure open-source core.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-number">1</div>
+      <div class="value-text">Framework to learn. Works across all technologies.</div>
+    </div>
+  </div>
+</div></section>
+<section id="products"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Products</span>
+    <h2>Three Products. One Vision.</h2>
+    <p>From open-source framework to enterprise platform — choose the level that fits your team.</p>
+  </div>
+
+  <div class="products-grid fade-in">
+    <!-- Kroviq Core -->
+    <div class="product-card">
+      <div class="product-card-header core">
+        <div class="product-icon">K</div>
+        <span class="product-badge">Open Source</span>
+      </div>
+      <h3>Kroviq Core</h3>
+      <p class="product-desc">The automation engine. A reusable Java framework consumed as a Maven dependency by any test project.</p>
+      <ul class="product-features">
+        <li>Selenium 4 WebDriver utilities</li>
+        <li>Cucumber BDD step definitions</li>
+        <li>Kroviq Engine — 6 UI framework table engines</li>
+        <li>Multi-framework wrappers (AntD, AG Grid, MUI, Angular Material, PrimeNG)</li>
+        <li>Enterprise components (FileUpload, DatePicker, MultiSelect, Tree, Form, Toast)</li>
+        <li>REST API testing with schema validation</li>
+        <li>Windows Desktop automation via WinAppDriver</li>
+        <li>Dynamic test data (JSON + Excel)</li>
+        <li>Self-healing locators + smart waits</li>
+        <li>Extent + custom HTML/Excel reporting</li>
+      </ul>
+      <div class="product-footer">
+        <span class="product-version">v2.5.9 · Hard Frozen</span>
+      </div>
+    </div>
+
+    <!-- Kroviq Studio -->
+    <div class="product-card featured">
+      <div class="product-card-header studio">
+        <div class="product-icon">S</div>
+        <span class="product-badge">Low-Code</span>
+      </div>
+      <h3>Kroviq Studio</h3>
+      <p class="product-desc">Visual test automation platform. Design, manage, execute, and monitor — without editing files manually.</p>
+      <ul class="product-features">
+        <li>Project & module management</li>
+        <li>Visual Object Repository with Constants.java preview</li>
+        <li>Drag-and-drop Test Case Designer</li>
+        <li>Execution profiles (Local / Grid / Cloud)</li>
+        <li>One-click execution with live SSE log streaming</li>
+        <li>Import existing Kroviq Core test suites</li>
+        <li>Generated assets (Constants, Features, JSON, RunManager)</li>
+        <li>Cucumber result parsing & execution history</li>
+        <li>React + TypeScript + MUI frontend</li>
+        <li>Spring Boot 3.3 + H2 backend</li>
+      </ul>
+      <div class="product-footer">
+        <span class="product-version">v1.2 · In Progress</span>
+      </div>
+    </div>
+
+    <!-- Kroviq Enterprise -->
+    <div class="product-card">
+      <div class="product-card-header enterprise">
+        <div class="product-icon">E</div>
+        <span class="product-badge">Commercial</span>
+      </div>
+      <h3>Kroviq Enterprise</h3>
+      <p class="product-desc">Advanced capabilities for teams at scale. Cloud execution, collaboration, analytics, and CI/CD pipelines.</p>
+      <ul class="product-features">
+        <li>Cloud-based parallel execution</li>
+        <li>Team workspaces & role-based access</li>
+        <li>Advanced analytics dashboards</li>
+        <li>CI/CD pipeline integration (Jenkins, GitHub Actions)</li>
+        <li>Scheduled execution & triggers</li>
+        <li>Cross-browser cloud matrix</li>
+        <li>Centralized test data management</li>
+        <li>Audit trail & compliance reporting</li>
+        <li>Priority support & SLA</li>
+        <li>Custom integrations & plugins</li>
+      </ul>
+      <div class="product-footer">
+        <span class="product-version">Planned · 2025</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+<section id="ai"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">AI Capabilities</span>
+    <h2>AI-Powered Workspace</h2>
+    <p>Intelligent automation assistants that analyze failures, draft defects, and generate test scenarios from business requirements.</p>
+  </div>
+
+  <div class="ai-grid fade-in">
+    <div class="ai-card">
+      <div class="ai-card-icon">🔍</div>
+      <h3>Failure RCA Assistant</h3>
+      <p>Automatic root cause analysis on test failures. Rule-based engine classifies failures by category (locator, timing, assertion, environment, driver) and assigns ownership.</p>
+      <div class="ai-tags">
+        <span class="ai-tag">5 Rule Categories</span>
+        <span class="ai-tag">Auto-Classification</span>
+        <span class="ai-tag">Recurrence Tracking</span>
+      </div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-icon">📝</div>
+      <h3>AI Defect Writer</h3>
+      <p>Generates structured defect drafts from failure context. Includes severity calculation, classification, evidence collection, and template rendering for your bug tracker.</p>
+      <div class="ai-tags">
+        <span class="ai-tag">Severity Calculator</span>
+        <span class="ai-tag">Evidence Collector</span>
+        <span class="ai-tag">Template Renderer</span>
+      </div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-card-icon">✨</div>
+      <h3>AI Spark</h3>
+      <p>BRD-to-Gherkin generation pipeline. Analyzes business requirements, generates scenarios, and writes reusable Gherkin with step catalog matching.</p>
+      <div class="ai-tags">
+        <span class="ai-tag">3-Stage Pipeline</span>
+        <span class="ai-tag">Step Catalog (40 patterns)</span>
+        <span class="ai-tag">Readiness Scoring</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="architecture"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Architecture</span>
+    <h2>Product Architecture</h2>
+    <p>Layered, modular design with clear separation of concerns. Each layer is independently testable and replaceable.</p>
+  </div>
+
+  <div class="arch-diagram fade-in">
+    <div class="arch-layer layer-top">
+      <div class="arch-layer-label">AI Layer</div>
+      <div class="arch-layer-items">
+        <span>RCA Assistant</span>
+        <span>Defect Writer</span>
+        <span>AI Spark</span>
+      </div>
+    </div>
+    <div class="arch-layer layer-reporting">
+      <div class="arch-layer-label">Reporting</div>
+      <div class="arch-layer-items">
+        <span>Extent HTML</span>
+        <span>Excel Report</span>
+        <span>Screenshot Manager</span>
+      </div>
+    </div>
+    <div class="arch-layer layer-engine">
+      <div class="arch-layer-label">Kroviq Engine</div>
+      <div class="arch-layer-items">
+        <span>AG Grid</span>
+        <span>AntD</span>
+        <span>MUI</span>
+        <span>PrimeNG</span>
+        <span>Angular Material</span>
+        <span>Generic</span>
+      </div>
+    </div>
+    <div class="arch-layer layer-wrapper">
+      <div class="arch-layer-label">Wrappers & Handlers</div>
+      <div class="arch-layer-items">
+        <span>FileUpload</span>
+        <span>DatePicker</span>
+        <span>MultiSelect</span>
+        <span>Tree</span>
+        <span>Form</span>
+        <span>Toast</span>
+        <span>Cascader</span>
+      </div>
+    </div>
+    <div class="arch-layer layer-interaction">
+      <div class="arch-layer-label">Interaction Layer</div>
+      <div class="arch-layer-items">
+        <span>GenericActionHandler</span>
+        <span>SmartLocator</span>
+        <span>WaitHandler</span>
+        <span>UIFrameworkDetector</span>
+      </div>
+    </div>
+    <div class="arch-layer layer-execution">
+      <div class="arch-layer-label">Execution Layer</div>
+      <div class="arch-layer-items">
+        <span>TestContext</span>
+        <span>RunManager</span>
+        <span>ParallelRunner</span>
+        <span>TestDataManager</span>
+        <span>Cucumber Hooks</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- End-to-End Workflow -->
+  <div class="section-header fade-in" style="margin-top:64px">
+    <span class="section-label">Workflow</span>
+    <h2>End-to-End Automation Flow</h2>
+    <p>From requirement to report in six steps.</p>
+  </div>
+
+  <div class="workflow fade-in">
+    <div class="workflow-step">
+      <div class="workflow-num">1</div>
+      <div class="workflow-title">Define</div>
+      <div class="workflow-desc">Write BRD or use AI Spark to generate Gherkin scenarios</div>
+    </div>
+    <div class="workflow-arrow">→</div>
+    <div class="workflow-step">
+      <div class="workflow-num">2</div>
+      <div class="workflow-title">Design</div>
+      <div class="workflow-desc">Map pages, elements, and test data in Studio or code</div>
+    </div>
+    <div class="workflow-arrow">→</div>
+    <div class="workflow-step">
+      <div class="workflow-num">3</div>
+      <div class="workflow-title">Generate</div>
+      <div class="workflow-desc">Auto-generate Constants, Features, and RunManager.json</div>
+    </div>
+    <div class="workflow-arrow">→</div>
+    <div class="workflow-step">
+      <div class="workflow-num">4</div>
+      <div class="workflow-title">Execute</div>
+      <div class="workflow-desc">Run locally, on Grid, or in Cloud with parallel threads</div>
+    </div>
+    <div class="workflow-arrow">→</div>
+    <div class="workflow-step">
+      <div class="workflow-num">5</div>
+      <div class="workflow-title">Report</div>
+      <div class="workflow-desc">Self-contained HTML + Excel reports with screenshots</div>
+    </div>
+    <div class="workflow-arrow">→</div>
+    <div class="workflow-step">
+      <div class="workflow-num">6</div>
+      <div class="workflow-title">Analyze</div>
+      <div class="workflow-desc">AI RCA classifies failures and drafts defect tickets</div>
+    </div>
+  </div>
+</div></section>
+<section id="features"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Capabilities</span>
+    <h2>Key Features</h2>
+    <p>Enterprise-grade automation capabilities built into the framework.</p>
+  </div>
+
+  <div class="features-grid fade-in">
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3>Selenium 4 WebDriver</h3>
+      <p>Smart locators, self-healing, JS fallback clicks, and configurable wait tiers</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🥒</div>
+      <h3>Cucumber BDD</h3>
+      <p>Gherkin scenarios, parameterized steps, iterative feature generation, and scenario repeating</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Kroviq Engine</h3>
+      <p>Universal table automation across 6 frameworks — find, sort, filter, select, expand, edit</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎭</div>
+      <h3>Multi-Framework Wrappers</h3>
+      <p>Auto-detect UI framework and dispatch to correct handler — zero config needed</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔌</div>
+      <h3>REST API Testing</h3>
+      <p>Native REST automation with chaining, schema validation, auth strategies, and step logging</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🖥️</div>
+      <h3>Desktop Automation</h3>
+      <p>Windows desktop testing via WinAppDriver with strategy-based locators</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📁</div>
+      <h3>File Upload Handler</h3>
+      <p>Universal upload — standard input, hidden input, wrapper resolution, multi-file, drop zone</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>DatePicker & DateTime</h3>
+      <p>Framework-agnostic date selection with calendar navigation and readonly detection</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">☑️</div>
+      <h3>MultiSelect & Tree</h3>
+      <p>Chip management, virtualization scroll, tree expand/collapse, cascader navigation</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⏳</div>
+      <h3>Loading & Toast Detection</h3>
+      <p>Intelligent wait for spinners, skeletons, overlays, and toast notifications</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <h3>Form & Wizard Handlers</h3>
+      <p>Validation assertion, multi-step wizard navigation, and rich text editor support</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧠</div>
+      <h3>AI-Powered Analysis</h3>
+      <p>Failure RCA, defect drafting, and BRD-to-Gherkin generation with step catalog matching</p>
+    </div>
+  </div>
+</div></section>
+<section id="technology"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Technology</span>
+    <h2>Technology Stack</h2>
+    <p>Built on proven, enterprise-grade open-source technologies.</p>
+  </div>
+
+  <div class="tech-columns fade-in">
+    <!-- Core Stack -->
+    <div class="tech-block">
+      <h3>Kroviq Core</h3>
+      <table class="tech-table">
+        <thead><tr><th>Library</th><th>Version</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Java</td><td>17</td><td>Language & runtime</td></tr>
+          <tr><td>Selenium</td><td>4.25.0</td><td>Browser automation</td></tr>
+          <tr><td>Cucumber</td><td>7.24.0</td><td>BDD step definitions</td></tr>
+          <tr><td>WebDriverManager</td><td>5.9.2</td><td>Driver binary management</td></tr>
+          <tr><td>RestAssured</td><td>5.5.0</td><td>REST API testing</td></tr>
+          <tr><td>Appium</td><td>9.3.0</td><td>Desktop automation</td></tr>
+          <tr><td>ExtentReports</td><td>5.1.2</td><td>HTML reporting</td></tr>
+          <tr><td>Jackson</td><td>2.18.0</td><td>JSON parsing</td></tr>
+          <tr><td>Apache POI</td><td>5.3.0</td><td>Excel read/write</td></tr>
+          <tr><td>Log4j</td><td>2.24.0</td><td>Logging</td></tr>
+          <tr><td>Maven</td><td>3.8+</td><td>Build system</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Studio Stack -->
+    <div class="tech-block">
+      <h3>Kroviq Studio</h3>
+      <table class="tech-table">
+        <thead><tr><th>Library</th><th>Version</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Spring Boot</td><td>3.3.0</td><td>Backend framework</td></tr>
+          <tr><td>H2 Database</td><td>2.2.224</td><td>Embedded persistence</td></tr>
+          <tr><td>JPA / Hibernate</td><td>6.5.2</td><td>ORM</td></tr>
+          <tr><td>React</td><td>18.3.1</td><td>Frontend framework</td></tr>
+          <tr><td>TypeScript</td><td>5.4.5</td><td>Type-safe frontend</td></tr>
+          <tr><td>Material UI</td><td>5.15.20</td><td>Component library</td></tr>
+          <tr><td>Vite</td><td>5.4.21</td><td>Frontend build</td></tr>
+          <tr><td>Axios</td><td>1.7.2</td><td>HTTP client</td></tr>
+          <tr><td>React Router</td><td>6.23.1</td><td>Client routing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Folder Structure -->
+  <div class="section-header fade-in" style="margin-top:64px">
+    <span class="section-label">Structure</span>
+    <h2>Project Layout</h2>
+    <p>Clean separation of concerns across packages.</p>
+  </div>
+
+  <div class="structure-block fade-in">
+    <pre class="code-tree">Kroviq_Core/
+├── src/main/java/kroviq/
+│   ├── ai/                    <span class="tree-comment"># AI capabilities (RCA, Defect Writer, Spark)</span>
+│   ├── api/                   <span class="tree-comment"># REST API testing (ApiClient, Auth, Schema)</span>
+│   ├── constants/             <span class="tree-comment"># Framework-wide constants</span>
+│   ├── hooks/                 <span class="tree-comment"># Cucumber lifecycle hooks</span>
+│   ├── model/                 <span class="tree-comment"># Data models (FlexiField, FlexiFieldType)</span>
+│   ├── parallel/              <span class="tree-comment"># Parallel execution runner</span>
+│   ├── reporting/             <span class="tree-comment"># Extent, Excel, HTML report generators</span>
+│   ├── utils/                 <span class="tree-comment"># Core utilities (WaitHandler, SmartLocator, etc.)</span>
+│   └── wrapper/               <span class="tree-comment"># Multi-framework UI wrappers</span>
+│       ├── aggrid/            <span class="tree-comment"># AG Grid engine + handler</span>
+│       ├── antd/              <span class="tree-comment"># Ant Design handlers</span>
+│       ├── angularmaterial/   <span class="tree-comment"># Angular Material handlers</span>
+│       ├── core/              <span class="tree-comment"># Interfaces (TableEngine, DatePicker, etc.)</span>
+│       ├── desktop/           <span class="tree-comment"># Windows Desktop (WinAppDriver)</span>
+│       ├── factory/           <span class="tree-comment"># ComponentHandlerFactory + Generic handlers</span>
+│       ├── mui/               <span class="tree-comment"># Material UI handlers</span>
+│       └── primeng/           <span class="tree-comment"># PrimeNG handlers</span>
+├── src/test/                  <span class="tree-comment"># 400+ framework unit/integration tests</span>
+├── docs/                      <span class="tree-comment"># API freeze docs, release notes, guides</span>
+└── pom.xml                    <span class="tree-comment"># Maven build (com.kroviq:kroviq-core:2.0.0)</span></pre>
+  </div>
+</div></section>
+<section id="commercial"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Editions</span>
+    <h2>Open Source vs Commercial</h2>
+    <p>Start free with Kroviq Core. Scale with Studio and Enterprise as your team grows.</p>
+  </div>
+
+  <div class="editions-table-wrap fade-in">
+    <table class="editions-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Community<br><span class="edition-sub">Free &amp; Open Source</span></th>
+          <th>Professional<br><span class="edition-sub">Kroviq Studio</span></th>
+          <th>Enterprise<br><span class="edition-sub">Commercial License</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Selenium 4 + Cucumber BDD</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Kroviq Engine (6 UI frameworks)</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Enterprise Component Handlers</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>REST API + Desktop Automation</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>AI RCA + Defect Writer + Spark</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>HTML + Excel Reporting</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Visual Object Repository</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Drag-and-Drop Test Designer</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>One-Click Execution + Live Logs</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Import & Asset Generation</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Cloud Parallel Execution</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+        <tr><td>Team Workspaces & RBAC</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+        <tr><td>CI/CD Pipeline Integration</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+        <tr><td>Analytics Dashboards</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+        <tr><td>Priority Support & SLA</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pricing-grid fade-in">
+    <div class="pricing-card">
+      <div class="pricing-tier">Community</div>
+      <div class="pricing-price">Free</div>
+      <div class="pricing-desc">Open-source framework. Use forever, contribute back.</div>
+      <a href="#" class="btn btn-outline" style="color:var(--color-text);border-color:var(--color-border);width:100%;justify-content:center">Get Started</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier">Professional</div>
+      <div class="pricing-price">Contact Us</div>
+      <div class="pricing-desc">Low-code Studio platform for teams adopting visual automation.</div>
+      <a href="#" class="btn btn-primary" style="width:100%;justify-content:center">Request Demo</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Enterprise</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-desc">Full platform with cloud execution, analytics, and dedicated support.</div>
+      <a href="#" class="btn btn-outline" style="color:var(--color-text);border-color:var(--color-border);width:100%;justify-content:center">Contact Sales</a>
+    </div>
+  </div>
+</div></section>
+<section id="roadmap"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">Roadmap</span>
+    <h2>Evolution Timeline</h2>
+    <p>From initial release to enterprise platform — a steady cadence of capability expansion.</p>
+  </div>
+
+  <div class="timeline fade-in">
+    <div class="timeline-item completed">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q1 2024</span>
+        <h3>v1.0 — Foundation</h3>
+        <p>Selenium + Cucumber framework, test data handling, Extent reporting, parallel execution</p>
+      </div>
+    </div>
+    <div class="timeline-item completed">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q2 2024</span>
+        <h3>v2.0 — Kroviq Engine</h3>
+        <p>Universal table automation, AbstractTableEngine, cross-page search, 6 framework engines</p>
+      </div>
+    </div>
+    <div class="timeline-item completed">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q3 2024</span>
+        <h3>v2.3 — Desktop + AI</h3>
+        <p>Windows Desktop via WinAppDriver, AI RCA Assistant, Defect Writer, AI Spark pipeline</p>
+      </div>
+    </div>
+    <div class="timeline-item completed">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q4 2024</span>
+        <h3>v2.5.9 — Enterprise Coverage</h3>
+        <p>FileUpload, DatePicker, MultiSelect, Tree, Form, Toast, DateTime, Wizard, RichText, Cascader — all hard frozen</p>
+      </div>
+    </div>
+    <div class="timeline-item active">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q1 2025</span>
+        <h3>Studio v1.2 — Execution Integration</h3>
+        <p>Import stabilization, live execution with SSE streaming, result parsing, execution history</p>
+      </div>
+    </div>
+    <div class="timeline-item upcoming">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q2 2025</span>
+        <h3>Studio v1.3 — Generated Assets</h3>
+        <p>Constants.java generator, feature file generator, test data JSON generator, sync tracking</p>
+      </div>
+    </div>
+    <div class="timeline-item upcoming">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Q3 2025</span>
+        <h3>Enterprise — Cloud & Teams</h3>
+        <p>Cloud execution, team workspaces, CI/CD integration, analytics dashboards</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="container">
+  <div class="section-header fade-in">
+    <span class="section-label">FAQ</span>
+    <h2>Frequently Asked Questions</h2>
+  </div>
+
+  <div class="faq-list fade-in">
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>What programming language does Kroviq use?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Kroviq Core is built with Java 17. Test projects consume it as a Maven dependency and write step definitions in Java. Kroviq Studio’s frontend uses TypeScript + React.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Do I need Kroviq Studio to use Kroviq Core?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>No. Kroviq Core is a standalone framework. You can use it directly with Maven, Cucumber, and your IDE. Studio is an optional visual layer on top.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Which UI frameworks are supported?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>AG Grid, Ant Design, Material UI (MUI), Angular Material, PrimeNG, and generic HTML tables. The UIFrameworkDetector auto-detects which framework is in use.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Is Kroviq truly open source?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Yes. Kroviq Core is fully open source with no feature gating. Studio and Enterprise add optional commercial capabilities but the core engine remains free forever.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>Can I run tests in parallel?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Yes. Kroviq supports thread-safe parallel execution via TestContext isolation. Configure thread count in RunManager.json or execution profiles.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>How does the AI capability work?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>AI features are rule-based and run offline — no external API calls. RCA uses pattern matching on exceptions, Defect Writer templates from context, and Spark uses a 3-stage pipeline with a step catalog.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>What’s the difference between Kroviq Engine and wrappers?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Kroviq Engine handles table-level operations (find row, sort, filter, paginate). Wrappers handle individual component interactions (dropdowns, date pickers, file uploads). Both auto-detect the UI framework.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+        <span>How do I get started?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer"><p>Clone the repository, run <code>mvn clean install</code>, then add the dependency to your test project. See the Quick Start Guide for a complete walkthrough.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ─── Footer ──────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-brand" style="margin-bottom:12px">
+          <div class="nav-logo">K</div>
+          <span class="nav-brand-text">Kroviq</span>
+        </div>
+        <p style="font-size:0.8125rem;color:rgba(255,255,255,0.4);line-height:1.6">Write Once. Run Across Technologies.<br>Open-source multi-technology automation framework.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Product</h4>
+        <a href="#platform">Platform</a>
+        <a href="#products">Products</a>
+        <a href="#features">Features</a>
+        <a href="#technology">Technology</a>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <a href="docs/Kroviq_QuickStart_Guide.md">Quick Start Guide</a>
+        <a href="docs/API_FREEZE_v2.x.md">API Reference</a>
+        <a href="docs/releases/RELEASE_NOTES_v2.5.md">Release Notes</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <a href="#">About KlivIQ</a>
+        <a href="#">Contact</a>
+        <a href="https://github.com">GitHub</a>
+        <a href="#commercial">Pricing</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Kroviq by KlivIQ Technologies. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── Scripts ─────────────────────────────────────────────── -->
+<script>
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + 100;
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const height = section.offsetHeight;
+    const id = section.getAttribute('id');
+    if (scrollY >= top && scrollY < top + height) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { passive: true });
+
+// Mobile nav: close on link click
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>

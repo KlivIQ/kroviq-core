@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kroviq — Enterprise Test Automation. AI Ready. Your Data Never Leaves Your Environment.">
+<meta name="author" content="Kroviq by KlivIQ Technologies">
+<title>Kroviq — Pre-Sales Brochure</title>
+<style>
+@page {
+  size: A4;
+  margin: 0;
+}
+
+:root {
+  --red: #C0392B;
+  --black: #111111;
+  --text: #2c2c2c;
+  --secondary: #555555;
+  --muted: #888888;
+  --border: #e0e0e0;
+  --surface: #f7f7f7;
+  --white: #ffffff;
+  --font: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  font-size: 9.5pt;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 18mm 20mm;
+  background: var(--white);
+  position: relative;
+  page-break-after: always;
+}
+.page:last-child { page-break-after: avoid; }
+
+h1 {
+  font-size: 20pt;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--black);
+  letter-spacing: -0.03em;
+}
+h2 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+p { color: var(--secondary); margin-bottom: 6px; }
+
+/* Header */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.logo-kroviq { height: 44px; width: auto; }
+.header-right { text-align: right; font-size: 8pt; color: var(--muted); }
+.header-right a { color: var(--red); text-decoration: none; font-weight: 600; }
+
+/* Hero */
+.hero { margin-bottom: 24px; }
+.hero h1 { margin-bottom: 14px; }
+.hero h1 .hl { color: var(--red); }
+.hero-body { font-size: 9.5pt; line-height: 1.65; color: var(--text); max-width: 155mm; }
+
+/* Section */
+.section { margin-bottom: 22px; }
+.section-title {
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+
+/* Pain Grid */
+.pain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.pain-item {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+}
+.pain-icon { font-size: 16pt; margin-bottom: 4px; display: block; }
+.pain-label { font-size: 8pt; font-weight: 500; color: var(--text); line-height: 1.3; }
+
+/* Workflow */
+.workflow-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 16px;
+}
+.workflow-step { text-align: center; flex: 1; }
+.workflow-step-label { font-size: 8.5pt; font-weight: 600; color: var(--black); }
+.workflow-step-sub { font-size: 7pt; color: var(--muted); margin-top: 2px; }
+.workflow-arrow { color: var(--red); font-size: 11pt; font-weight: 700; flex-shrink: 0; margin: 0 4px; }
+
+/* Platform Stack */
+.platform-stack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.platform-card {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  position: relative;
+}
+.platform-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--red);
+  border-radius: 4px 4px 0 0;
+}
+.platform-card h3 { font-size: 9pt; margin-bottom: 4px; }
+.platform-card p { font-size: 7.5pt; line-height: 1.45; color: var(--secondary); margin: 0; }
+.platform-tag {
+  display: inline-block;
+  font-size: 6.5pt;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--red);
+  margin-top: 6px;
+}
+
+/* Differentiators */
+.diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.diff-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.diff-bullet {
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.diff-text { font-size: 8pt; font-weight: 500; color: var(--text); line-height: 1.35; }
+
+/* Deployment */
+.deploy-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.deploy-card {
+  text-align: center;
+  padding: 12px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.deploy-icon { font-size: 18pt; margin-bottom: 4px; display: block; }
+.deploy-label { font-size: 7.5pt; font-weight: 600; color: var(--text); line-height: 1.3; }
+.deploy-note { font-size: 8pt; color: var(--secondary); text-align: center; margin-top: 10px; font-style: italic; }
+
+/* Comparison Table */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 8pt; }
+.compare-table th {
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 8pt;
+  border-bottom: 2px solid var(--black);
+  color: var(--black);
+}
+.compare-table th:last-child { color: var(--red); }
+.compare-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--secondary);
+  vertical-align: top;
+}
+.compare-table td:first-child { font-weight: 500; color: var(--text); }
+.compare-table td:last-child { font-weight: 500; color: var(--text); }
+.compare-table tbody tr:last-child td { border-bottom: none; }
+
+/* CTA */
+.cta-section {
+  margin-top: 20px;
+  padding: 20px 24px;
+  background: var(--black);
+  border-radius: 4px;
+  text-align: center;
+}
+.cta-section h2 { color: var(--white); font-size: 11pt; margin-bottom: 10px; }
+.cta-section p { color: rgba(255,255,255,0.6); font-size: 8.5pt; margin-bottom: 4px; }
+.cta-section a { color: var(--red); text-decoration: none; font-weight: 600; }
+.cta-email { font-size: 9pt; color: var(--white) !important; font-weight: 600; }
+
+/* Footer */
+.page-footer {
+  position: absolute;
+  bottom: 18mm;
+  left: 20mm;
+  right: 20mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.footer-left { display: flex; align-items: center; gap: 10px; }
+.logo-kliviq { height: 20px; width: auto; }
+.footer-text { font-size: 7pt; color: var(--muted); }
+.footer-right { font-size: 7pt; color: var(--muted); text-align: right; }
+.footer-right a { color: var(--muted); text-decoration: none; }
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; padding: 18mm 20mm; box-shadow: none; }
+}
+@media screen {
+  body { background: #e8e8e8; padding: 20px 0; }
+  .page { box-shadow: 0 2px 12px rgba(0,0,0,0.12); margin-bottom: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGE 1 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <img src="src/main/resources/assets/kroviq_logo_original.png" alt="Kroviq" class="logo-kroviq">
+    <div class="header-right">
+      <a href="https://www.kliviq.com">www.kliviq.com</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Enterprise Test Automation.<br>AI Ready. <span class="hl">Your Data Never<br>Leaves Your Environment.</span></h1>
+    <p class="hero-body">
+      Most AI-powered automation platforms require sending your application, test assets or production-like data to cloud services. For organisations handling sensitive customer data — banking, financial services, insurance, healthcare and government systems — this creates compliance, privacy and security challenges. Kroviq gives you the speed and intelligence of modern automation while allowing everything to run entirely inside your own environment, keeping your data under your control.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Why Traditional Automation Is Difficult</div>
+    <div class="pain-grid">
+      <div class="pain-item"><span class="pain-icon">⚙️</span><span class="pain-label">Framework Complexity</span></div>
+      <div class="pain-item"><span class="pain-icon">🔧</span><span class="pain-label">High Maintenance</span></div>
+      <div class="pain-item"><span class="pain-icon">💻</span><span class="pain-label">Heavy Coding Required</span></div>
+      <div class="pain-item"><span class="pain-icon">📚</span><span class="pain-label">Difficult Onboarding</span></div>
+      <div class="pain-item"><span class="pain-icon">🧩</span><span class="pain-label">Fragmented Tools</span></div>
+      <div class="pain-item"><span class="pain-icon">☁️</span><span class="pain-label">Cloud &amp; AI Compliance</span></div>
+      <div class="pain-item"><span class="pain-icon">🔒</span><span class="pain-label">Security Risks</span></div>
+      <div class="pain-item"><span class="pain-icon">🐢</span><span class="pain-label">Slow Delivery</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What Kroviq Solves — One Platform, End to End</div>
+    <div class="workflow-strip">
+      <div class="workflow-step"><div class="workflow-step-label">Design</div><div class="workflow-step-sub">Visual test creation</div></div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step"><div class="workflow-step-label">Generate</div><div class="workflow-step-sub">Production-ready code</div></div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step"><div class="workflow-step-label">Synchronise</div><div class="workflow-step-sub">Bi-directional sync</div></div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step"><div class="workflow-step-label">Execute</div><div class="workflow-step-sub">Local or distributed</div></div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step"><div class="workflow-step-label">Analyse</div><div class="workflow-step-sub">AI-powered insights</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Platform Overview</div>
+    <div class="platform-stack">
+      <div class="platform-card">
+        <h3>Kroviq Core</h3>
+        <p>Open-source automation engine. Selenium, Cucumber, 6 UI frameworks. The foundation everything runs on.</p>
+        <span class="platform-tag">Open Source</span>
+      </div>
+      <div class="platform-card">
+        <h3>Kroviq Studio</h3>
+        <p>Low-code visual platform. Design tests, manage objects, execute and monitor without writing code.</p>
+        <span class="platform-tag">Low-Code</span>
+      </div>
+      <div class="platform-card">
+        <h3>Kroviq Enterprise</h3>
+        <p>Cloud execution, team workspaces, CI/CD integration, analytics dashboards and role-based access.</p>
+        <span class="platform-tag">Commercial</span>
+      </div>
+      <div class="platform-card">
+        <h3>Kroviq AI Workspace</h3>
+        <p>Failure RCA, defect drafting and BRD-to-Gherkin generation. Runs locally. No data leaves your network.</p>
+        <span class="platform-tag">AI · Local-First</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">
+      <img src="src/main/resources/assets/kliviq-logo.png" alt="KlivIQ Technologies" class="logo-kliviq">
+      <span class="footer-text">Kroviq by KlivIQ Technologies</span>
+    </div>
+    <div class="footer-right">
+      <a href="https://www.kliviq.com">www.kliviq.com</a> · © KlivIQ Technologies. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGE 2 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="page-header">
+    <img src="src/main/resources/assets/kroviq_logo_original.png" alt="Kroviq" class="logo-kroviq">
+    <div class="header-right">
+      <a href="https://www.kliviq.com">www.kliviq.com</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Key Differentiators</div>
+    <div class="diff-grid">
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Local-first architecture</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">AI optional, never mandatory</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Your environment, your data</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Low-code visual automation</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Open-source execution engine</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Enterprise-ready from day one</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Extensible plugin architecture</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Supports custom frameworks</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Import existing automation</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">Generate production-ready assets</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">End-to-end lifecycle coverage</span></div>
+      <div class="diff-item"><div class="diff-bullet"></div><span class="diff-text">No vendor lock-in</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Deployment Options</div>
+    <div class="deploy-grid">
+      <div class="deploy-card"><span class="deploy-icon">💻</span><span class="deploy-label">Developer Laptop</span></div>
+      <div class="deploy-card"><span class="deploy-icon">🖥️</span><span class="deploy-label">Team Server</span></div>
+      <div class="deploy-card"><span class="deploy-icon">🏢</span><span class="deploy-label">On-Premises</span></div>
+      <div class="deploy-card"><span class="deploy-icon">🔐</span><span class="deploy-label">Private Cloud</span></div>
+      <div class="deploy-card"><span class="deploy-icon">🏛️</span><span class="deploy-label">Enterprise Data Centre</span></div>
+    </div>
+    <p class="deploy-note">Your data never needs to leave your controlled environment.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Why Kroviq</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>Traditional Frameworks</th>
+          <th>Cloud AI Tools</th>
+          <th>Kroviq</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Learning curve</td><td>Steep — weeks to months</td><td>Moderate — vendor-specific</td><td>Low — visual + code options</td></tr>
+        <tr><td>Coding effort</td><td>High — everything manual</td><td>Low — but limited control</td><td>Minimal — generate from design</td></tr>
+        <tr><td>AI dependency</td><td>None available</td><td>Mandatory — core to product</td><td>Optional — enhances, never required</td></tr>
+        <tr><td>Data privacy</td><td>Local — but no AI benefits</td><td>Data sent to cloud services</td><td>Local-first — AI runs on-premises</td></tr>
+        <tr><td>Compliance</td><td>Manual responsibility</td><td>Depends on vendor policies</td><td>Full control — your environment</td></tr>
+        <tr><td>Visual design</td><td>None — code only</td><td>Yes — but cloud-dependent</td><td>Yes — runs locally</td></tr>
+        <tr><td>Execution</td><td>Local only</td><td>Cloud only</td><td>Local, Grid, or Cloud — your choice</td></tr>
+        <tr><td>Extensibility</td><td>High — but complex</td><td>Limited — vendor controlled</td><td>High — open-source + plugins</td></tr>
+        <tr><td>Enterprise readiness</td><td>Requires custom build</td><td>Ready — but with trade-offs</td><td>Ready — no trade-offs</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cta-section">
+    <h2>Ready to modernise your automation without compromising security?</h2>
+    <p><a href="https://www.kliviq.com">www.kliviq.com</a></p>
+    <p><a href="mailto:hello@kliviq.com" class="cta-email">hello@kliviq.com</a></p>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">
+      <img src="src/main/resources/assets/kliviq-logo.png" alt="KlivIQ Technologies" class="logo-kliviq">
+      <span class="footer-text">Kroviq by KlivIQ Technologies</span>
+    </div>
+    <div class="footer-right">
+      <a href="https://www.kliviq.com">www.kliviq.com</a> · © KlivIQ Technologies. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

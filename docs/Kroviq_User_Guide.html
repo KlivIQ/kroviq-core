@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kroviq User Guide — Complete documentation for QA Engineers and Automation Engineers.">
+<meta name="author" content="Kroviq by KlivIQ Technologies">
+<title>Kroviq — User Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── Variables ─────────────────────────────────────────────── */
+:root {
+  --color-primary: #764224;
+  --color-primary-light: #8B5232;
+  --color-primary-subtle: rgba(118, 66, 36, 0.08);
+  --color-dark: #0f0f0f;
+  --color-surface: #fbfaf7;
+  --color-card: #ffffff;
+  --color-border: #f0ede8;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #6b6560;
+  --color-text-muted: #9c9691;
+  --color-success: #2e7d32;
+  --color-warning: #e65100;
+  --color-info: #1565c0;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-elevated: 0 4px 12px rgba(0,0,0,0.08);
+  --transition: 150ms cubic-bezier(0.2, 0, 0, 1);
+  --sidebar-width: 280px;
+  --header-height: 56px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--color-primary-light); }
+
+/* ─── Header ────────────────────────────────────────────────── */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  background: rgba(15, 15, 15, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-logo {
+  width: 28px; height: 28px;
+  background: var(--color-primary);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: #fff;
+}
+.header-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+.header-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.header-toggle {
+  display: none;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 8px;
+}
+.header-toggle span {
+  display: block;
+  width: 18px; height: 2px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 1px;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  background: var(--color-card);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  padding: 16px 0;
+  z-index: 900;
+  transition: transform 0.25s ease;
+}
+.sidebar-search {
+  padding: 0 16px 12px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 8px;
+}
+.sidebar-search input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--transition);
+}
+.sidebar-search input:focus { border-color: var(--color-primary); }
+.sidebar-search input::placeholder { color: var(--color-text-muted); }
+
+.nav-section {
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+.nav-section-title {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  padding: 12px 12px 6px;
+}
+.nav-link {
+  display: block;
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition);
+  line-height: 1.4;
+}
+.nav-link:hover { background: var(--color-primary-subtle); color: var(--color-text); }
+.nav-link.active {
+  background: var(--color-primary-subtle);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+.nav-link.sub {
+  padding-left: 28px;
+  font-size: 0.75rem;
+}
+.nav-link.hidden { display: none; }
+
+/* ─── Main Content ──────────────────────────────────────────── */
+.main {
+  margin-left: var(--sidebar-width);
+  margin-top: var(--header-height);
+  padding: 40px 48px 80px;
+  max-width: 860px;
+}
+
+/* ─── Content Typography ────────────────────────────────────── */
+.main h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.main h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-top: 56px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+  letter-spacing: -0.01em;
+}
+.main h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+.main h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.main p {
+  margin-bottom: 12px;
+  color: var(--color-text-secondary);
+}
+.main ul, .main ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+.main li {
+  margin-bottom: 6px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+.main code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  background: var(--color-primary-subtle);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--color-primary);
+}
+.main pre {
+  background: #1e1e1e;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: #d4d4d4;
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+.main pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ─── Content Blocks ────────────────────────────────────────── */
+.info-block {
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+  border-left: 3px solid;
+}
+.info-block.purpose { background: rgba(21,101,192,0.05); border-color: var(--color-info); }
+.info-block.tip { background: rgba(46,125,50,0.05); border-color: var(--color-success); }
+.info-block.warning { background: rgba(230,81,0,0.05); border-color: var(--color-warning); }
+.info-block.note { background: var(--color-primary-subtle); border-color: var(--color-primary); }
+.info-block-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.info-block.purpose .info-block-title { color: var(--color-info); }
+.info-block.tip .info-block-title { color: var(--color-success); }
+.info-block.warning .info-block-title { color: var(--color-warning); }
+.info-block.note .info-block-title { color: var(--color-primary); }
+.info-block p { margin-bottom: 0; font-size: 0.875rem; }
+
+.steps-list {
+  counter-reset: step;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+.steps-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.steps-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0; top: 2px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.screenshot-placeholder {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  text-align: center;
+  margin: 16px 0 20px;
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+.screenshot-placeholder::before {
+  content: '📷';
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.expected-result {
+  background: rgba(46,125,50,0.05);
+  border: 1px solid rgba(46,125,50,0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin: 12px 0 20px;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+.expected-result::before {
+  content: '✓ Expected Result: ';
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 48px 0;
+}
+
+/* ─── Table ─────────────────────────────────────────────────── */
+.main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.8125rem;
+}
+.main th {
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.main td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+.main td:first-child { font-weight: 500; color: var(--color-text); }
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .main {
+    margin-left: 0;
+    padding: 32px 24px 60px;
+  }
+  .header-toggle { display: block; }
+  .header-subtitle { display: none; }
+}
+
+/* ─── Print ─────────────────────────────────────────────────── */
+@media print {
+  .header, .sidebar, .header-toggle { display: none; }
+  .main { margin: 0; padding: 20px; max-width: 100%; }
+  .main h2 { page-break-before: always; }
+  .main h2:first-of-type { page-break-before: avoid; }
+  .screenshot-placeholder { border-style: solid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── Header ──────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-logo">K</div>
+    <span class="header-title">Kroviq User Guide</span>
+    <span class="header-subtitle">v2.5.9 · Complete Documentation</span>
+  </div>
+  <div class="header-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- ─── Sidebar Navigation ──────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-search">
+    <input type="text" id="nav-search" placeholder="Search documentation..." oninput="filterNav(this.value)">
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-link" href="#installation">Installation</a>
+      <a class="nav-link sub" href="#install-prerequisites">Prerequisites</a>
+      <a class="nav-link sub" href="#install-steps">Setup Steps</a>
+      <a class="nav-link" href="#workspace">Workspace</a>
+      <a class="nav-link sub" href="#workspace-structure">Folder Structure</a>
+      <a class="nav-link sub" href="#workspace-config">Configuration</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Studio Features</div>
+      <a class="nav-link" href="#projects">Projects</a>
+      <a class="nav-link" href="#modules">Modules</a>
+      <a class="nav-link" href="#pages">Pages</a>
+      <a class="nav-link" href="#object-repository">Object Repository</a>
+      <a class="nav-link" href="#test-cases">Test Cases</a>
+      <a class="nav-link" href="#test-data">Test Data</a>
+      <a class="nav-link" href="#execution-profiles">Execution Profiles</a>
+      <a class="nav-link" href="#generated-assets">Generated Assets</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Execution</div>
+      <a class="nav-link" href="#import-sync">Import &amp; Sync</a>
+      <a class="nav-link" href="#execution">Execution</a>
+      <a class="nav-link" href="#reports">Reports</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Configuration</div>
+      <a class="nav-link" href="#settings">Settings</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-link" href="#troubleshooting">Troubleshooting</a>
+      <a class="nav-link" href="#best-practices">Best Practices</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- ─── Main Content ────────────────────────────────────────── -->
+<main class="main">
+
+<h1>Kroviq User Guide</h1>
+<p>Complete documentation for the Kroviq test automation platform. This guide covers installation, configuration, and daily usage of Kroviq Core and Kroviq Studio.</p>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- INSTALLATION -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="installation">Installation</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Install Kroviq Core on your machine so you can build and run automated tests.</p>
+</div>
+
+<h3 id="install-prerequisites">Prerequisites</h3>
+
+<p>Before you install Kroviq, make sure you have these tools on your computer:</p>
+
+<table>
+  <thead><tr><th>Tool</th><th>Version</th><th>Why You Need It</th></tr></thead>
+  <tbody>
+    <tr><td>Java JDK</td><td>17 or higher</td><td>Kroviq is written in Java</td></tr>
+    <tr><td>Maven</td><td>3.8 or higher</td><td>Builds and manages dependencies</td></tr>
+    <tr><td>IDE</td><td>IntelliJ IDEA or Eclipse</td><td>Write and edit code</td></tr>
+    <tr><td>Git</td><td>Any recent version</td><td>Clone the repository</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tip</div>
+  <p>Use IntelliJ IDEA Community Edition — it is free and works perfectly with Kroviq. Install the Lombok plugin from the IDE marketplace.</p>
+</div>
+
+<h3 id="install-steps">Setup Steps</h3>
+
+<h4>When to Use</h4>
+<p>Follow these steps when you are setting up Kroviq for the first time on a new machine, or when you need to update to a newer version.</p>
+
+<h4>Step-by-Step Instructions</h4>
+
+<ol class="steps-list">
+  <li>Open a terminal (Command Prompt or PowerShell on Windows).</li>
+  <li>Clone the Kroviq Core repository:
+    <pre><code>git clone https://github.com/your-org/Kroviq_Core.git</code></pre>
+  </li>
+  <li>Navigate into the project folder:
+    <pre><code>cd Kroviq_Core</code></pre>
+  </li>
+  <li>Build and install the framework:
+    <pre><code>mvn clean install</code></pre>
+  </li>
+  <li>Wait for the build to complete. You should see <code>BUILD SUCCESS</code> in the terminal.</li>
+  <li>Open your test project and add the Kroviq dependency to your <code>pom.xml</code>:
+    <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.kroviq&lt;/groupId&gt;
+    &lt;artifactId&gt;kroviq-core&lt;/artifactId&gt;
+    &lt;version&gt;2.0.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+  </li>
+  <li>Reload Maven in your IDE (right-click pom.xml → Maven → Reload Project).</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Terminal showing BUILD SUCCESS after mvn clean install</div>
+
+<div class="expected-result">The framework JAR is installed in your local Maven repository. Your test project can now use all Kroviq classes and utilities.</div>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>If you see SSL errors during Maven build, add these flags: <code>-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true</code></p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Kroviq Core is a framework library — it does not contain test cases. You write your tests in a separate project (like Kroviq_TestSuiteTemplate) that depends on this framework.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- WORKSPACE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="workspace">Workspace</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Understand how the Kroviq workspace is organized so you know where to find and place files.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Refer to this section when you are navigating the project for the first time, or when you need to find a specific file or folder.</p>
+
+<h3 id="workspace-structure">Folder Structure</h3>
+
+<pre><code>Kroviq_Framework/
+├── Kroviq_Core/                   # Framework source code (do not modify)
+├── Kroviq_TestSuiteTemplate/      # Your test project (write tests here)
+│   ├── src/main/java/kroviq/
+│   │   ├── constants/             # Element locators (XPaths, IDs)
+│   │   ├── pages/                 # Page classes
+│   │   └── helpers/               # Project-specific helpers
+│   ├── src/test/java/
+│   │   ├── runners/               # Test runner (entry point)
+│   │   └── stepdefinitions/       # Cucumber step definitions
+│   ├── src/test/resources/
+│   │   └── features/              # Gherkin feature files
+│   ├── TestDatastore/json/        # Test data files
+│   ├── Reports/                   # Generated test reports
+│   └── RunManager.json            # Execution configuration
+└── kroviq-studio/                 # Kroviq Studio (optional UI platform)
+</code></pre>
+
+<div class="screenshot-placeholder">Screenshot: IDE project explorer showing the workspace folder structure</div>
+
+<h3 id="workspace-config">Configuration</h3>
+
+<p>The main configuration file is <code>RunManager.json</code> in your test project root. It controls how tests are executed:</p>
+
+<pre><code>{
+  "browser": "chrome",
+  "environmentURL": "https://your-app.com",
+  "executionMode": "LOCAL",
+  "parallel": false,
+  "threads": 1,
+  "selectedSuite": "REGRESSION",
+  "testDataSource": "json",
+  "captureScreenshotsOnFailure": true
+}</code></pre>
+
+<table>
+  <thead><tr><th>Field</th><th>What It Does</th><th>Options</th></tr></thead>
+  <tbody>
+    <tr><td>browser</td><td>Which browser to use</td><td>chrome, firefox, edge</td></tr>
+    <tr><td>environmentURL</td><td>Base URL of your application</td><td>Any valid URL</td></tr>
+    <tr><td>executionMode</td><td>Where to run tests</td><td>LOCAL, GRID, CLOUD</td></tr>
+    <tr><td>parallel</td><td>Run tests at the same time</td><td>true, false</td></tr>
+    <tr><td>threads</td><td>How many tests run together</td><td>1, 2, 3, etc.</td></tr>
+    <tr><td>selectedSuite</td><td>Which test suite to run</td><td>REGRESSION, SMOKE, etc.</td></tr>
+    <tr><td>testDataSource</td><td>Where test data comes from</td><td>json, excel</td></tr>
+  </tbody>
+</table>
+
+<div class="expected-result">You understand the workspace layout and can locate any file you need. RunManager.json is configured for your environment.</div>
+
+<div class="info-block warning">
+  <div class="info-block-title">Warning</div>
+  <p>Never modify files inside <code>Kroviq_Core/</code> directly. It is a shared framework. All your test code goes in the test project (e.g., Kroviq_TestSuiteTemplate).</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PROJECTS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="projects">Projects</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>A Project is the top-level container in Kroviq Studio. It represents one application or system that you are testing. All modules, pages, test cases, and execution profiles belong to a project.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Create a project when you start testing a new application. Each application you test should have its own project.</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Create a New Project</h4>
+
+<ol class="steps-list">
+  <li>Open Kroviq Studio in your browser (http://localhost:3000).</li>
+  <li>Click <strong>Projects</strong> in the left sidebar.</li>
+  <li>Click the <strong>+ New Project</strong> button in the top-right corner.</li>
+  <li>Fill in the form:
+    <ul>
+      <li><strong>Name</strong> — A short name for your application (e.g., "WingIt Airlines")</li>
+      <li><strong>Description</strong> — What this application does (optional)</li>
+      <li><strong>Test Suite Path</strong> — Full path to your test project folder (e.g., <code>D:/Kroviq_Framework/Kroviq_TestSuiteTemplate</code>)</li>
+      <li><strong>Framework Path</strong> — Path to Kroviq Core (e.g., <code>D:/Kroviq_Framework/Kroviq_Core</code>)</li>
+      <li><strong>Framework Version</strong> — The version you are using (e.g., <code>2.0.0</code>)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: New Project dialog with fields filled in</div>
+
+<div class="expected-result">The project appears in the projects list. You can now create modules, pages, and test cases inside it.</div>
+
+<h4>Edit a Project</h4>
+
+<ol class="steps-list">
+  <li>Go to the <strong>Projects</strong> page.</li>
+  <li>Click the three-dot menu (⋮) on the project card.</li>
+  <li>Select <strong>Edit</strong>.</li>
+  <li>Change the fields you need to update.</li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h4>Delete a Project</h4>
+
+<ol class="steps-list">
+  <li>Go to the <strong>Projects</strong> page.</li>
+  <li>Click the three-dot menu (⋮) on the project card.</li>
+  <li>Select <strong>Delete</strong>.</li>
+  <li>Confirm the deletion in the dialog.</li>
+</ol>
+
+<div class="info-block warning">
+  <div class="info-block-title">Warning</div>
+  <p>Deleting a project removes ALL its modules, pages, elements, test cases, and execution profiles. This action cannot be undone.</p>
+</div>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Use clear, short project names. Avoid special characters. The Test Suite Path must point to a valid folder that contains a <code>pom.xml</code> file.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>The Test Suite Path is required for execution. If you only want to design tests without running them, you can leave it empty initially and add it later.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="modules">Modules</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>A Module represents a functional area of your application (e.g., Login, Flight Search, Booking, Payments). Modules help you organize your tests into logical groups.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Create a module for each major feature or section of your application. Think of modules as chapters in a book — each one covers a different topic.</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Create a New Module</h4>
+
+<ol class="steps-list">
+  <li>Select your project from the <strong>Projects</strong> page.</li>
+  <li>Click <strong>Modules</strong> in the left sidebar.</li>
+  <li>Click the <strong>+ New Module</strong> button.</li>
+  <li>Fill in the form:
+    <ul>
+      <li><strong>Name</strong> — The module name (e.g., "Flight Search")</li>
+      <li><strong>Module Tag</strong> — Auto-generated tag used for test execution (e.g., <code>FLIGHT_SEARCH</code>)</li>
+      <li><strong>Description</strong> — What this module covers (optional)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Modules page showing list of modules with tags</div>
+
+<div class="expected-result">The module appears in the modules list. The module tag is automatically generated from the name (e.g., "FlightSearch" becomes "FLIGHT_SEARCH").</div>
+
+<h4>Understanding Module Tags</h4>
+
+<p>Module tags are used to:</p>
+<ul>
+  <li>Filter which tests to run (in execution profiles)</li>
+  <li>Organize feature files into folders</li>
+  <li>Tag test cases for suite selection</li>
+</ul>
+
+<p>Tag generation rules:</p>
+<table>
+  <thead><tr><th>Module Name</th><th>Generated Tag</th></tr></thead>
+  <tbody>
+    <tr><td>Login</td><td>LOGIN</td></tr>
+    <tr><td>FlightSearch</td><td>FLIGHT_SEARCH</td></tr>
+    <tr><td>DemoMUI</td><td>DEMO_MUI</td></tr>
+    <tr><td>DemoPrimeNG</td><td>DEMO_PRIME_NG</td></tr>
+  </tbody>
+</table>
+
+<h4>Edit a Module</h4>
+
+<ol class="steps-list">
+  <li>Go to the <strong>Modules</strong> page.</li>
+  <li>Click the three-dot menu (⋮) on the module row.</li>
+  <li>Select <strong>Edit</strong>.</li>
+  <li>Update the fields.</li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h4>Delete a Module</h4>
+
+<ol class="steps-list">
+  <li>Click the three-dot menu (⋮) on the module row.</li>
+  <li>Select <strong>Delete</strong>.</li>
+  <li>Confirm the deletion.</li>
+</ol>
+
+<div class="info-block warning">
+  <div class="info-block-title">Warning</div>
+  <p>Deleting a module removes all its pages, elements, and test cases. Make sure you have a backup if needed.</p>
+</div>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Keep module names short and descriptive. Use PascalCase (e.g., FlightSearch, not flight_search). One module per major feature is the recommended approach.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Module tags are used in Cucumber tag expressions. When you run a suite, Kroviq filters tests by these tags. For example, running the "SMOKE" suite might include tests tagged with <code>@SMOKE</code> across multiple modules.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="pages">Pages</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>A Page represents a screen or view in your application (e.g., Login Page, Search Results Page, Booking Confirmation Page). Pages group related elements together, following the Page Object Model pattern.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Create a page for each distinct screen in your application. If a screen has many elements, you can split it into multiple pages (e.g., "Booking Form" and "Booking Summary" instead of one large "Booking" page).</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Create a New Page</h4>
+
+<ol class="steps-list">
+  <li>Select your project and navigate to a module.</li>
+  <li>Click <strong>Pages</strong> in the left sidebar.</li>
+  <li>Click the <strong>+ New Page</strong> button.</li>
+  <li>Fill in the form:
+    <ul>
+      <li><strong>Name</strong> — The page name (e.g., "LoginPage")</li>
+      <li><strong>Group</strong> — Optional grouping for organization (e.g., "Authentication")</li>
+      <li><strong>Description</strong> — What this page represents (optional)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Pages list showing pages grouped by category with element counts</div>
+
+<div class="expected-result">The page appears in the pages list. You can now add elements (locators) to this page in the Object Repository.</div>
+
+<h4>Organize Pages with Groups</h4>
+
+<p>Groups help you organize pages when a module has many screens:</p>
+
+<table>
+  <thead><tr><th>Group</th><th>Pages</th></tr></thead>
+  <tbody>
+    <tr><td>Authentication</td><td>LoginPage, RegisterPage, ForgotPasswordPage</td></tr>
+    <tr><td>Search</td><td>FlightSearchPage, SearchResultsPage</td></tr>
+    <tr><td>Booking</td><td>PassengerDetailsPage, SeatSelectionPage, PaymentPage</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Use PascalCase for page names and always end with "Page" (e.g., LoginPage, not login or Login_Page). This matches the Java class naming convention used in the generated Constants file.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Pages are scoped to a module. You cannot share pages across modules. If two modules use the same screen, create the page in each module separately.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- OBJECT REPOSITORY -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="object-repository">Object Repository</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>The Object Repository stores all UI element locators (XPaths, CSS selectors, IDs) for your application. It is the single source of truth for how Kroviq finds elements on the screen.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Use the Object Repository whenever you need to add, edit, or view element locators. Every element your tests interact with must be defined here first.</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Add a New Element</h4>
+
+<ol class="steps-list">
+  <li>Navigate to <strong>Object Repository</strong> in the sidebar (under your active module).</li>
+  <li>Select a page from the page tree on the left panel.</li>
+  <li>Click the <strong>+ Add Element</strong> button in the elements table.</li>
+  <li>Fill in the form:
+    <ul>
+      <li><strong>Constant Name</strong> — Java constant name (e.g., <code>TXT_USERNAME</code>)</li>
+      <li><strong>Display Name</strong> — Human-readable name (e.g., "Username Input")</li>
+      <li><strong>Locator Type</strong> — How to find the element (xpath, id, css, name)</li>
+      <li><strong>Locator Value</strong> — The actual locator string (e.g., <code>//input[@id='username']</code>)</li>
+      <li><strong>Action Type</strong> — What action to perform (CLICK, TYPE, SELECT, etc.)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Object Repository split-pane view — page tree (left), elements table (center), Constants.java preview (right)</div>
+
+<div class="expected-result">The element appears in the elements table. The Constants.java preview panel on the right updates to show the generated Java code.</div>
+
+<h4>Locator Naming Convention</h4>
+
+<p>Use a prefix that indicates the element type:</p>
+
+<table>
+  <thead><tr><th>Prefix</th><th>Element Type</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td>TXT_</td><td>Text input field</td><td>TXT_USERNAME, TXT_EMAIL</td></tr>
+    <tr><td>BTN_</td><td>Button</td><td>BTN_LOGIN, BTN_SUBMIT</td></tr>
+    <tr><td>LNK_</td><td>Link</td><td>LNK_FORGOT_PASSWORD</td></tr>
+    <tr><td>DDL_</td><td>Dropdown</td><td>DDL_COUNTRY, DDL_CABIN_CLASS</td></tr>
+    <tr><td>CHK_</td><td>Checkbox</td><td>CHK_REMEMBER_ME</td></tr>
+    <tr><td>RDO_</td><td>Radio button</td><td>RDO_ONE_WAY, RDO_ROUND_TRIP</td></tr>
+    <tr><td>LBL_</td><td>Label / text display</td><td>LBL_ERROR_MESSAGE</td></tr>
+    <tr><td>TBL_</td><td>Table</td><td>TBL_SEARCH_RESULTS</td></tr>
+  </tbody>
+</table>
+
+<h4>Constants.java Preview</h4>
+
+<p>The right panel shows a live preview of the generated Java constants file:</p>
+
+<pre><code>public class LoginPageConstants {
+    public static final String TXT_USERNAME = "//input[@id='username']";
+    public static final String TXT_PASSWORD = "//input[@id='password']";
+    public static final String BTN_LOGIN = "//button[@type='submit']";
+    public static final String LBL_ERROR = "//div[@class='error-message']";
+}</code></pre>
+
+<h4>Edit an Element</h4>
+
+<ol class="steps-list">
+  <li>Click on the element row in the table.</li>
+  <li>Update the fields in the edit form.</li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<h4>Delete an Element</h4>
+
+<ol class="steps-list">
+  <li>Click the three-dot menu (⋮) on the element row.</li>
+  <li>Select <strong>Delete</strong>.</li>
+  <li>Confirm the deletion.</li>
+</ol>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Prefer stable locators: use <code>id</code>, <code>data-testid</code>, or <code>name</code> attributes over complex XPaths. Shorter locators are faster and less likely to break when the UI changes.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>The Action Type determines how Kroviq interacts with the element. For example, a CLICK action will click the element, while a TYPE action will clear the field and type text into it. Choose the correct action type for each element.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TEST CASES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="test-cases">Test Cases</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Test Cases define the steps your automated test will execute. Each test case is a sequence of actions (click, type, verify) that validates a specific behavior of your application.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Create a test case for each scenario you want to automate. For example: "Successful Login", "Login with Invalid Password", "Search for One-Way Flight".</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Create a New Test Case</h4>
+
+<ol class="steps-list">
+  <li>Navigate to <strong>Test Cases</strong> in the sidebar (under your active module).</li>
+  <li>Click the <strong>+ New Test Case</strong> button.</li>
+  <li>Fill in the form:
+    <ul>
+      <li><strong>Name</strong> — Descriptive name (e.g., "TC_LOGIN_001_ValidLogin")</li>
+      <li><strong>Description</strong> — What this test validates (optional)</li>
+      <li><strong>Tags</strong> — Cucumber tags for filtering (e.g., <code>@SMOKE</code>, <code>@REGRESSION</code>)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Test Cases page with DesignerLayout — case list (left), step designer (center), test data panel (right)</div>
+
+<div class="expected-result">The test case appears in the list. You can now add steps to it using the Step Designer.</div>
+
+<h4>Add Steps Using the Step Designer</h4>
+
+<ol class="steps-list">
+  <li>Select a test case from the list on the left.</li>
+  <li>Click <strong>+ Add Step</strong> in the Step Designer panel.</li>
+  <li>Fill in the step dialog:
+    <ul>
+      <li><strong>Keyword</strong> — Given, When, Then, And</li>
+      <li><strong>Action</strong> — What to do (e.g., "click", "type", "verify text")</li>
+      <li><strong>Object</strong> — Click the picker icon to open the Object Picker and select an element</li>
+      <li><strong>Value</strong> — Data to use (e.g., text to type, or <code>TD_Username</code> for test data reference)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save Step</strong>.</li>
+  <li>Repeat for each step in your test case.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Step Dialog showing keyword, action, object picker, and value fields</div>
+
+<h4>Using the Object Picker</h4>
+
+<ol class="steps-list">
+  <li>In the Step Dialog, click the picker icon next to the Object field.</li>
+  <li>The Object Picker modal opens with a page tree on the left.</li>
+  <li>Select a page from the tree.</li>
+  <li>The right panel shows all elements on that page with a search bar.</li>
+  <li>Click on the element you want to use.</li>
+  <li>The modal closes and the element is linked to your step.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Object Picker modal — page tree (left) and element list with search (right)</div>
+
+<h4>Reorder Steps (Drag and Drop)</h4>
+
+<ol class="steps-list">
+  <li>Hover over a step row in the Step Designer.</li>
+  <li>Click and hold the drag handle (≡) on the left side.</li>
+  <li>Drag the step to its new position.</li>
+  <li>Release to drop. The order is saved automatically.</li>
+</ol>
+
+<h4>Disable a Step</h4>
+
+<p>You can temporarily disable a step without deleting it:</p>
+<ol class="steps-list">
+  <li>Click the three-dot menu (⋮) on the step row.</li>
+  <li>Select <strong>Toggle Enabled</strong>.</li>
+  <li>Disabled steps appear grayed out and are skipped during execution.</li>
+</ol>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Use the <code>TD_</code> prefix in the Value field to reference test data dynamically. For example, <code>TD_Username</code> will be replaced at runtime with the actual value from your test data file.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Test case names should follow the convention: <code>TC_MODULE_NNN_Description</code> (e.g., TC_LOGIN_001_ValidLogin). This helps with organization and makes it easy to find tests in reports.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TEST DATA -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="test-data">Test Data</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Test Data provides the values your tests use at runtime (usernames, passwords, search criteria, expected results). Separating data from test logic lets you run the same test with different inputs without changing code.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Use test data whenever your test needs input values or expected results that might change between environments or test runs. Never hardcode values in your test steps.</p>
+
+<h3>Data Sources</h3>
+
+<p>Kroviq supports two data sources, controlled by the <code>testDataSource</code> field in RunManager.json:</p>
+
+<table>
+  <thead><tr><th>Source</th><th>Format</th><th>Best For</th></tr></thead>
+  <tbody>
+    <tr><td>JSON</td><td>One .json file per module</td><td>Most projects (recommended)</td></tr>
+    <tr><td>Excel</td><td>One .xlsx file per module</td><td>Teams familiar with spreadsheets</td></tr>
+  </tbody>
+</table>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Add Test Data in Studio</h4>
+
+<ol class="steps-list">
+  <li>Select a test case in the Test Cases page.</li>
+  <li>Open the <strong>Test Data Panel</strong> on the right side.</li>
+  <li>Click <strong>+ Add Data</strong>.</li>
+  <li>Enter a <strong>Key</strong> (e.g., "Username") and a <strong>Value</strong> (e.g., "john.doe@example.com").</li>
+  <li>Click <strong>Save</strong>.</li>
+  <li>In your test step, reference this data using <code>TD_Username</code> in the Value field.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Test Data Panel showing key-value pairs and JSON preview</div>
+
+<div class="expected-result">The test data key-value pair is saved. At runtime, any step using <code>TD_Username</code> will automatically receive the value "john.doe@example.com".</div>
+
+<h4>JSON Test Data Format</h4>
+
+<p>JSON files are stored in <code>TestDatastore/json/</code> with one file per module:</p>
+
+<pre><code>// TestDatastore/json/Login.json
+{
+  "TC_LOGIN_001_ValidLogin": {
+    "Username": "john.doe@example.com",
+    "Password": "SecurePass123",
+    "ExpectedWelcome": "Welcome, John!"
+  },
+  "TC_LOGIN_002_InvalidPassword": {
+    "Username": "john.doe@example.com",
+    "Password": "WrongPassword",
+    "ExpectedError": "Invalid credentials"
+  }
+}</code></pre>
+
+<h4>How TD_ Resolution Works</h4>
+
+<p>When Kroviq encounters <code>TD_FieldName</code> in a step:</p>
+<ol>
+  <li>It looks up the current test case name (e.g., "TC_LOGIN_001_ValidLogin")</li>
+  <li>It finds the matching entry in the module's data file</li>
+  <li>It replaces <code>TD_FieldName</code> with the actual value</li>
+</ol>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Choose ONE data source per project and stick with it. If you need to migrate, use the built-in migration tools: <code>ExcelToJsonMigrator</code> or <code>JsonToExcelMigrator</code>.</p>
+</div>
+
+<div class="info-block warning">
+  <div class="info-block-title">Warning</div>
+  <p>Never store real passwords or sensitive data in test data files. Use placeholder values for local testing and environment variables for CI/CD pipelines.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Test data is scoped to a module. Each module has its own data file. The TestDataManager automatically loads the correct file based on the current test's module tag.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- EXECUTION PROFILES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="execution-profiles">Execution Profiles</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>An Execution Profile defines HOW your tests run — which browser, which environment, how many threads, and which test suite. Profiles let you run the same tests in different configurations without editing files.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Create execution profiles when you need to run tests in different environments (Dev, QA, Staging), different browsers (Chrome, Firefox, Edge), or with different parallelism settings.</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Create a New Execution Profile</h4>
+
+<ol class="steps-list">
+  <li>Select your project.</li>
+  <li>Click <strong>Execution Profiles</strong> in the sidebar.</li>
+  <li>Click the <strong>+ New Profile</strong> button.</li>
+  <li>Fill in the form:
+    <ul>
+      <li><strong>Name</strong> — Profile name (e.g., "Chrome QA Parallel")</li>
+      <li><strong>Browser</strong> — chrome, firefox, or edge</li>
+      <li><strong>Environment URL</strong> — Base URL of the target environment (e.g., <code>https://qa.wingitairlines.com</code>)</li>
+      <li><strong>Execution Mode</strong> — LOCAL (your machine), GRID (Selenium Grid), or CLOUD (cloud provider)</li>
+      <li><strong>Parallel</strong> — Enable or disable parallel execution</li>
+      <li><strong>Threads</strong> — Number of parallel threads (1–10)</li>
+      <li><strong>Selected Suite</strong> — Which test suite to run (e.g., REGRESSION, SMOKE)</li>
+      <li><strong>Screenshots on Failure</strong> — Capture screenshots when a step fails</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong>.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Execution Profile form with all fields filled in</div>
+
+<div class="expected-result">The profile appears in the profiles list. You can now use it to generate a RunManager.json or launch an execution.</div>
+
+<h4>Preview RunManager.json</h4>
+
+<ol class="steps-list">
+  <li>Click the three-dot menu (⋮) on a profile.</li>
+  <li>Select <strong>Preview RunManager</strong>.</li>
+  <li>A dialog shows the generated RunManager.json content.</li>
+  <li>Review the configuration to make sure it is correct.</li>
+</ol>
+
+<h4>Download RunManager.json</h4>
+
+<ol class="steps-list">
+  <li>Click the three-dot menu (⋮) on a profile.</li>
+  <li>Select <strong>Download RunManager</strong>.</li>
+  <li>The file downloads to your computer.</li>
+  <li>Place it in your test project root folder to use it for execution.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: RunManager.json preview dialog showing generated configuration</div>
+
+<h4>Common Profile Configurations</h4>
+
+<table>
+  <thead><tr><th>Profile Name</th><th>Browser</th><th>Mode</th><th>Parallel</th><th>Suite</th></tr></thead>
+  <tbody>
+    <tr><td>Chrome Smoke Local</td><td>chrome</td><td>LOCAL</td><td>No</td><td>SMOKE</td></tr>
+    <tr><td>Chrome Regression Parallel</td><td>chrome</td><td>LOCAL</td><td>Yes (4 threads)</td><td>REGRESSION</td></tr>
+    <tr><td>Firefox QA</td><td>firefox</td><td>LOCAL</td><td>No</td><td>REGRESSION</td></tr>
+    <tr><td>Grid Full Suite</td><td>chrome</td><td>GRID</td><td>Yes (8 threads)</td><td>FULL</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Start with parallel disabled (1 thread) until your tests are stable. Then gradually increase threads. If tests fail in parallel but pass sequentially, you likely have shared state issues.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Kroviq deduplicates profiles automatically. If you try to create a profile with the same browser + URL + mode + parallel + threads as an existing one, it will warn you about the duplicate.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- GENERATED ASSETS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="generated-assets">Generated Assets</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Generated Assets are the code files that Kroviq Studio creates from your visual designs. These files are what the Kroviq Core framework actually uses to run tests.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Generate assets after you have finished designing your test cases, pages, and elements in Studio. The generated files go into your test project and are ready to execute.</p>
+
+<h3>Types of Generated Assets</h3>
+
+<table>
+  <thead><tr><th>Asset Type</th><th>What It Generates</th><th>Goes Into</th></tr></thead>
+  <tbody>
+    <tr><td>Constants.java</td><td>Java class with element locators</td><td><code>src/main/java/kroviq/constants/</code></td></tr>
+    <tr><td>Feature Files</td><td>Gherkin .feature files with scenarios</td><td><code>src/test/resources/features/</code></td></tr>
+    <tr><td>Test Data JSON</td><td>JSON files with test data per module</td><td><code>TestDatastore/json/</code></td></tr>
+    <tr><td>RunManager.json</td><td>Execution configuration file</td><td>Project root</td></tr>
+  </tbody>
+</table>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Generate Assets</h4>
+
+<ol class="steps-list">
+  <li>Navigate to <strong>Generated Assets</strong> in the sidebar.</li>
+  <li>You will see cards for each asset type with their sync status.</li>
+  <li>Click <strong>Generate</strong> on the asset you want to create.</li>
+  <li>Preview the generated content in the preview panel.</li>
+  <li>Click <strong>Download</strong> to save the file to your test project.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Generated Assets page showing cards with sync status indicators</div>
+
+<div class="expected-result">The generated files are downloaded and ready to be placed in your test project. The sync status shows "Up to date" for assets that match the current Studio state.</div>
+
+<h4>Sync Status Indicators</h4>
+
+<table>
+  <thead><tr><th>Status</th><th>Meaning</th><th>Action Needed</th></tr></thead>
+  <tbody>
+    <tr><td>✅ Up to Date</td><td>Generated file matches Studio state</td><td>None</td></tr>
+    <tr><td>⚠️ Out of Sync</td><td>Studio has changes not yet generated</td><td>Re-generate the asset</td></tr>
+    <tr><td>❌ Not Generated</td><td>Asset has never been generated</td><td>Generate for the first time</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Always preview generated assets before downloading. Check that locators are correct and feature files have the right step wording. It is easier to fix issues in Studio than in the generated code.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Generated assets are one-way: Studio → Code. If you edit the generated files manually, your changes will be overwritten the next time you generate. Always make changes in Studio first.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- IMPORT & SYNC -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="import-sync">Import &amp; Sync</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Import lets you bring an existing Kroviq Core test suite into Studio. It reads your feature files, constants, and test data, then creates the corresponding pages, elements, and test cases in Studio automatically.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Use Import when you already have a working test suite built with Kroviq Core and want to manage it visually in Studio. This is a one-time migration step for existing projects.</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Import an Existing Test Suite</h4>
+
+<ol class="steps-list">
+  <li>Make sure your project's <strong>Test Suite Path</strong> is set correctly (in Project settings).</li>
+  <li>Navigate to <strong>Import &amp; Sync</strong> in the sidebar.</li>
+  <li>Click <strong>Import from Test Suite</strong>.</li>
+  <li>Studio scans the test suite folder and shows a summary of what it found:
+    <ul>
+      <li>Number of feature files</li>
+      <li>Number of constants classes</li>
+      <li>Number of test data entries</li>
+    </ul>
+  </li>
+  <li>Click <strong>Start Import</strong>.</li>
+  <li>Wait for the import to complete. Progress is shown in real-time.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Import progress showing feature files being parsed and linked</div>
+
+<div class="expected-result">Studio creates modules, pages, elements, and test cases from your existing code. The Import History page shows the job with status, duration, and a detailed report.</div>
+
+<h4>How Feature Linking Works</h4>
+
+<p>During import, Studio parses each step line in your feature files and tries to match elements:</p>
+<ol>
+  <li><strong>Constant name match</strong> — Exact match on the constant name (e.g., <code>TXT_USERNAME</code>)</li>
+  <li><strong>Fuzzy display name match</strong> — If no exact match, tries matching 2+ words from the display name</li>
+  <li><strong>Null if ambiguous</strong> — If multiple elements match, the link is left empty for manual resolution</li>
+</ol>
+
+<h4>View Import History</h4>
+
+<ol class="steps-list">
+  <li>Go to <strong>Import &amp; Sync</strong> page.</li>
+  <li>The history table shows all past import jobs.</li>
+  <li>Click <strong>View Report</strong> to see detailed results (what was imported, what failed, what needs manual linking).</li>
+  <li>Use <strong>Replay</strong> to re-run an import (useful after fixing issues).</li>
+  <li>Use <strong>Delete</strong> to remove an import job record.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Import History table with View Report, Replay, and Delete actions</div>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Run import on a clean project (no existing modules). If you import into a project that already has data, duplicates may be created. Review the import report carefully after each run.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Module tags are auto-generated during import using the naming convention: camelCase splits become UPPER_SNAKE_CASE (e.g., "DemoMUI" → "DEMO_MUI"). RunManager profiles are deduplicated — if an identical profile already exists, it will not be created again.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- EXECUTION -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="execution">Execution</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Execution lets you run your automated tests directly from Studio with one click. You can watch live logs, see real-time progress, and abort if something goes wrong.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Use Execution when you want to run tests without opening a terminal. Studio handles everything: building the RunManager, launching Maven, streaming logs, and parsing results.</p>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Launch a Test Execution</h4>
+
+<ol class="steps-list">
+  <li>Navigate to <strong>Execution</strong> in the sidebar.</li>
+  <li>Select the <strong>Scope</strong> — what to run:
+    <ul>
+      <li><strong>Project</strong> — Run all tests in the project</li>
+      <li><strong>Module</strong> — Run tests for a specific module</li>
+      <li><strong>Test Case</strong> — Run a single test case</li>
+      <li><strong>Tags</strong> — Run tests matching a tag expression (e.g., <code>@SMOKE</code>)</li>
+      <li><strong>Profile</strong> — Use a saved execution profile</li>
+    </ul>
+  </li>
+  <li>If needed, select the specific module, test case, or profile.</li>
+  <li>Click <strong>Run</strong>.</li>
+  <li>The live log panel opens and shows real-time output from the test runner.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Execution page with scope selector, Run button, and live log panel streaming output</div>
+
+<div class="expected-result">Tests start running. The log panel shows live output. When complete, you see a summary with total tests, passed, failed, and skipped counts.</div>
+
+<h4>Monitor a Running Execution</h4>
+
+<p>While tests are running, you can see:</p>
+<ul>
+  <li><strong>Live log stream</strong> — Real-time Maven/Cucumber output via SSE (Server-Sent Events)</li>
+  <li><strong>Elapsed time</strong> — Timer showing how long the execution has been running</li>
+  <li><strong>Status indicator</strong> — QUEUED → RUNNING → PASSED/FAILED/ERROR</li>
+</ul>
+
+<h4>Abort an Execution</h4>
+
+<ol class="steps-list">
+  <li>While a test is running, click the <strong>Abort</strong> button.</li>
+  <li>Confirm the abort in the dialog.</li>
+  <li>The test process is terminated and status changes to ABORTED.</li>
+</ol>
+
+<h4>View Execution History</h4>
+
+<ol class="steps-list">
+  <li>Navigate to <strong>Execution History</strong> in the sidebar.</li>
+  <li>The table shows all past executions with:
+    <ul>
+      <li>Status (PASSED, FAILED, ABORTED, ERROR)</li>
+      <li>Pass rate bar (visual indicator)</li>
+      <li>Duration</li>
+      <li>Triggered by (who started it)</li>
+    </ul>
+  </li>
+  <li>Click <strong>Replay</strong> to re-run the same execution.</li>
+  <li>Click <strong>Monitor</strong> to view the log of a past execution.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: Execution History table with pass rate bars and action buttons</div>
+
+<h4>Execution Statuses</h4>
+
+<table>
+  <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>QUEUED</td><td>Execution is waiting to start</td></tr>
+    <tr><td>RUNNING</td><td>Tests are currently executing</td></tr>
+    <tr><td>PASSED</td><td>All tests passed successfully</td></tr>
+    <tr><td>FAILED</td><td>One or more tests failed</td></tr>
+    <tr><td>ABORTED</td><td>Execution was manually stopped</td></tr>
+    <tr><td>ERROR</td><td>Execution could not start (configuration issue)</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Start with a small scope (single test case or SMOKE suite) to verify your setup works. Once confirmed, run larger suites. Use the Replay button to quickly re-run failed executions after fixing issues.</p>
+</div>
+
+<div class="info-block warning">
+  <div class="info-block-title">Warning</div>
+  <p>Make sure the project's Test Suite Path is set correctly before running. If the path is wrong, the execution will fail with an ERROR status. The path must point to a folder containing a valid <code>pom.xml</code>.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Execution results are parsed from Cucumber output. The pattern <code>"X Scenarios (Y passed)"</code> is used to determine pass/fail counts. Reports are saved in the test project's <code>Reports/</code> folder.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- REPORTS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="reports">Reports</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Reports show you what happened during a test execution — which tests passed, which failed, why they failed, and screenshots of failures. Kroviq generates self-contained HTML and Excel reports automatically.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Review reports after every test execution to understand results. Share reports with your team, managers, or stakeholders to communicate test status.</p>
+
+<h3>Report Types</h3>
+
+<table>
+  <thead><tr><th>Report</th><th>Format</th><th>Best For</th></tr></thead>
+  <tbody>
+    <tr><td>Custom HTML Report</td><td>.html (self-contained)</td><td>Detailed step-by-step results with screenshots</td></tr>
+    <tr><td>Excel Report</td><td>.xlsx (multi-sheet)</td><td>Summary data, sharing with non-technical stakeholders</td></tr>
+    <tr><td>Extent Report</td><td>.html</td><td>Interactive dashboard with charts and filters</td></tr>
+  </tbody>
+</table>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Find Your Reports</h4>
+
+<ol class="steps-list">
+  <li>After execution completes, reports are saved in your test project:
+    <pre><code>Kroviq_TestSuiteTemplate/Reports/Run_YYYYMMDD_HHMMSS/</code></pre>
+  </li>
+  <li>Each run creates a new folder with a timestamp.</li>
+  <li>Inside the folder you will find:
+    <ul>
+      <li><code>TestRun_*_Custom.html</code> — The main HTML report</li>
+      <li><code>TestRun_*_Report.xlsx</code> — Excel summary</li>
+      <li><code>Screenshots/</code> — Failure screenshots</li>
+    </ul>
+  </li>
+  <li>Open the HTML file in any browser to view the report.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: HTML report showing test case results with pass/fail status and embedded screenshots</div>
+
+<div class="expected-result">A self-contained HTML report opens in your browser showing all test results, step details, and failure screenshots. No server or internet connection needed to view it.</div>
+
+<h4>What the HTML Report Shows</h4>
+
+<ul>
+  <li><strong>Summary</strong> — Total tests, passed, failed, skipped, duration</li>
+  <li><strong>Test Cases</strong> — Each test case with its steps and status</li>
+  <li><strong>Step Details</strong> — Each step shows action, element, value, and result</li>
+  <li><strong>Screenshots</strong> — Embedded screenshots on failure (no external files needed)</li>
+  <li><strong>AI RCA</strong> — If enabled, shows root cause analysis for failures</li>
+  <li><strong>Defect Draft</strong> — If enabled, shows auto-generated defect descriptions</li>
+</ul>
+
+<h4>Excel Report Sheets</h4>
+
+<table>
+  <thead><tr><th>Sheet</th><th>Content</th></tr></thead>
+  <tbody>
+    <tr><td>Summary</td><td>Overall pass/fail counts and percentages</td></tr>
+    <tr><td>Test Cases</td><td>One row per test case with status and duration</td></tr>
+    <tr><td>Failed Steps</td><td>Details of each failed step for quick triage</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>The HTML report is self-contained — all screenshots are embedded as base64. You can email it or upload it to a shared drive without worrying about broken image links.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Screenshots are only captured on failure (when <code>captureScreenshotsOnFailure</code> is true in RunManager.json). To capture screenshots on every step, change the setting — but be aware this increases report size significantly.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SETTINGS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="settings">Settings</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Settings control how the Kroviq framework behaves — environment URLs, browser options, AI features, wait times, and reporting preferences.</p>
+</div>
+
+<h4>When to Use</h4>
+<p>Configure settings when you first set up a project, when you switch environments, or when you need to enable/disable features like AI RCA or parallel execution.</p>
+
+<h3>Configuration Files</h3>
+
+<table>
+  <thead><tr><th>File</th><th>Location</th><th>Controls</th></tr></thead>
+  <tbody>
+    <tr><td>RunManager.json</td><td>Test project root</td><td>Browser, URL, suite, parallel, data source</td></tr>
+    <tr><td>environment.properties</td><td><code>src/main/resources/configs/environments/</code></td><td>Environment-specific URLs and credentials</td></tr>
+    <tr><td>log4j2.xml</td><td><code>src/main/resources/</code></td><td>Logging levels and output format</td></tr>
+  </tbody>
+</table>
+
+<h3>Step-by-Step Instructions</h3>
+
+<h4>Change the Target Environment</h4>
+
+<ol class="steps-list">
+  <li>Open <code>RunManager.json</code> in your test project.</li>
+  <li>Change the <code>environmentURL</code> field to the new URL:
+    <pre><code>"environmentURL": "https://staging.wingitairlines.com"</code></pre>
+  </li>
+  <li>Save the file.</li>
+  <li>Run your tests — they will now target the new environment.</li>
+</ol>
+
+<h4>Enable AI Features</h4>
+
+<ol class="steps-list">
+  <li>Open <code>RunManager.json</code>.</li>
+  <li>Add or update the AI feature flags:
+    <pre><code>"rcaEnabled": true,
+"defectWriterEnabled": true</code></pre>
+  </li>
+  <li>Save the file.</li>
+  <li>On the next execution, failed tests will include RCA analysis and defect drafts in the report.</li>
+</ol>
+
+<div class="screenshot-placeholder">Screenshot: RunManager.json open in IDE with key settings highlighted</div>
+
+<div class="expected-result">Settings take effect on the next test execution. No restart or rebuild is needed — RunManager.json is read fresh at the start of each run.</div>
+
+<h4>Configure Wait Times</h4>
+
+<p>Kroviq uses tiered waits. You can override defaults in your properties file:</p>
+
+<pre><code># Wait tier overrides (in seconds)
+wait.click=short
+wait.type=short
+wait.upload=long
+wait.page_load=long</code></pre>
+
+<table>
+  <thead><tr><th>Tier</th><th>Default Duration</th><th>Use For</th></tr></thead>
+  <tbody>
+    <tr><td>SHORT</td><td>5 seconds</td><td>Quick actions (click, type)</td></tr>
+    <tr><td>MEDIUM</td><td>10 seconds</td><td>Page transitions, dropdowns</td></tr>
+    <tr><td>LONG</td><td>20 seconds</td><td>File uploads, page loads, API calls</td></tr>
+  </tbody>
+</table>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Never use <code>Thread.sleep()</code> in your tests. Always use WaitHandler with the appropriate tier. If elements take longer than expected, increase the tier rather than adding hardcoded sleeps.</p>
+</div>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>Settings in RunManager.json override defaults in the framework. If a setting is not specified in RunManager.json, the framework uses its built-in default value.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TROUBLESHOOTING -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Quick solutions to common problems you may encounter when using Kroviq. Each issue includes symptoms, cause, and step-by-step fix.</p>
+</div>
+
+<h3>Build Failures</h3>
+
+<h4>Issue: "BUILD FAILURE" during mvn clean install</h4>
+<p><strong>Symptoms:</strong> Maven build fails with dependency resolution errors or SSL certificate errors.</p>
+<p><strong>Cause:</strong> Network issues, proxy settings, or SSL certificate validation failures.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Try adding SSL bypass flags:
+    <pre><code>mvn clean install -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.resolver.transport=wagon</code></pre>
+  </li>
+  <li>If behind a corporate proxy, configure Maven's <code>settings.xml</code> with proxy details.</li>
+  <li>Delete the <code>.m2/repository</code> cache and rebuild.</li>
+</ol>
+
+<h4>Issue: "Java version not supported"</h4>
+<p><strong>Symptoms:</strong> Compilation errors mentioning unsupported class file version.</p>
+<p><strong>Cause:</strong> You are using Java 11 or lower. Kroviq requires Java 17+.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Check your Java version: <code>java -version</code></li>
+  <li>Install Java 17 or higher.</li>
+  <li>Set <code>JAVA_HOME</code> to point to the Java 17 installation.</li>
+  <li>Restart your terminal and IDE.</li>
+</ol>
+
+<h3>Execution Failures</h3>
+
+<h4>Issue: "WebDriverException: Cannot find browser binary"</h4>
+<p><strong>Symptoms:</strong> Test fails immediately with a driver error.</p>
+<p><strong>Cause:</strong> Browser is not installed, or WebDriverManager cannot download the driver.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Make sure the browser specified in RunManager.json is installed on your machine.</li>
+  <li>Check your internet connection (WebDriverManager downloads drivers automatically).</li>
+  <li>If offline, manually place the driver binary in your system PATH.</li>
+</ol>
+
+<h4>Issue: "NoSuchElementException" or "Element not found"</h4>
+<p><strong>Symptoms:</strong> Test fails because it cannot find an element on the page.</p>
+<p><strong>Cause:</strong> The locator is wrong, the page has not loaded yet, or the UI has changed.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Open the application manually and verify the element exists.</li>
+  <li>Use browser DevTools (F12) to check if the locator matches.</li>
+  <li>If the UI changed, update the locator in the Object Repository.</li>
+  <li>If it is a timing issue, check that the correct wait tier is being used.</li>
+</ol>
+
+<h4>Issue: "StaleElementReferenceException"</h4>
+<p><strong>Symptoms:</strong> Test finds the element but fails when trying to interact with it.</p>
+<p><strong>Cause:</strong> The page refreshed or re-rendered between finding and clicking the element.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>This is usually handled automatically by Kroviq's retry mechanism.</li>
+  <li>If it persists, add a wait before the action (use WaitHandler, not Thread.sleep).</li>
+  <li>Check if the page has dynamic content that reloads frequently.</li>
+</ol>
+
+<h4>Issue: "ElementClickInterceptedException"</h4>
+<p><strong>Symptoms:</strong> Click action fails because another element is covering the target.</p>
+<p><strong>Cause:</strong> A modal, overlay, loading spinner, or toast is blocking the element.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Kroviq automatically retries with a JavaScript fallback click.</li>
+  <li>If it still fails, wait for the overlay to disappear (use LoadingStateDetector).</li>
+  <li>Check if a toast notification is covering the button.</li>
+</ol>
+
+<h3>Studio Issues</h3>
+
+<h4>Issue: Studio backend won't start</h4>
+<p><strong>Symptoms:</strong> <code>java -jar kroviq-studio-api-1.0.0.jar</code> fails or port 8080 is in use.</p>
+<p><strong>Cause:</strong> Another process is using port 8080, or the H2 database file is locked.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Check if port 8080 is in use: <code>netstat -ano | findstr :8080</code></li>
+  <li>Kill the conflicting process or change the port in <code>application.properties</code>.</li>
+  <li>If the DB is locked, close all other Studio instances and try again.</li>
+</ol>
+
+<h4>Issue: Execution shows ERROR status immediately</h4>
+<p><strong>Symptoms:</strong> Clicking Run shows ERROR without any log output.</p>
+<p><strong>Cause:</strong> The Test Suite Path in the project settings is wrong or the folder does not contain a <code>pom.xml</code>.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Go to Project settings and verify the Test Suite Path.</li>
+  <li>Make sure the path uses forward slashes (e.g., <code>D:/Kroviq_Framework/Kroviq_TestSuiteTemplate</code>).</li>
+  <li>Verify the folder contains a valid <code>pom.xml</code> file.</li>
+</ol>
+
+<h4>Issue: Tests pass locally but fail in parallel</h4>
+<p><strong>Symptoms:</strong> Tests work with 1 thread but fail with multiple threads.</p>
+<p><strong>Cause:</strong> Shared mutable state between tests (static variables, shared browser sessions).</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Make sure all test state is stored in TestContext (which is thread-safe).</li>
+  <li>Never use static mutable variables in step definitions.</li>
+  <li>Each thread gets its own WebDriver instance — do not share drivers.</li>
+</ol>
+
+<h4>Issue: Import creates duplicate modules</h4>
+<p><strong>Symptoms:</strong> After import, you see duplicate modules or elements.</p>
+<p><strong>Cause:</strong> Import was run on a project that already had data.</p>
+<p><strong>Solution:</strong></p>
+<ol class="steps-list">
+  <li>Delete the duplicates manually.</li>
+  <li>For future imports, use a clean project (no existing modules).</li>
+  <li>Or delete all modules first, then re-import.</li>
+</ol>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>When reporting issues, always include: (1) the error message, (2) the step that failed, (3) the locator being used, and (4) a screenshot of the application state. This helps resolve issues much faster.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BEST PRACTICES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<h2 id="best-practices">Best Practices</h2>
+
+<div class="info-block purpose">
+  <div class="info-block-title">Purpose</div>
+  <p>Follow these guidelines to keep your test automation maintainable, reliable, and scalable as your project grows.</p>
+</div>
+
+<h3>Architecture Rules</h3>
+
+<table>
+  <thead><tr><th>✅ Do</th><th>❌ Don't</th></tr></thead>
+  <tbody>
+    <tr><td>Use GenericActionHandler for all interactions</td><td>Call Selenium WebDriver directly in step definitions</td></tr>
+    <tr><td>Use WaitHandler with appropriate tiers</td><td>Use Thread.sleep() anywhere in your code</td></tr>
+    <tr><td>Store state in TestContext</td><td>Use static mutable variables</td></tr>
+    <tr><td>Put locators in Constants classes</td><td>Hardcode XPaths in step definitions</td></tr>
+    <tr><td>Put test data in JSON/Excel files</td><td>Hardcode test values in feature files</td></tr>
+    <tr><td>Reuse existing parameterized steps</td><td>Create new steps for every variation</td></tr>
+  </tbody>
+</table>
+
+<h3>Naming Conventions</h3>
+
+<table>
+  <thead><tr><th>Item</th><th>Convention</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td>Module names</td><td>PascalCase</td><td>FlightSearch, SeatSelection</td></tr>
+    <tr><td>Page names</td><td>PascalCase + "Page" suffix</td><td>LoginPage, BookingConfirmationPage</td></tr>
+    <tr><td>Element constants</td><td>PREFIX_UPPER_SNAKE_CASE</td><td>TXT_USERNAME, BTN_SUBMIT</td></tr>
+    <tr><td>Test case names</td><td>TC_MODULE_NNN_Description</td><td>TC_LOGIN_001_ValidLogin</td></tr>
+    <tr><td>Test data keys</td><td>PascalCase</td><td>Username, ExpectedError</td></tr>
+    <tr><td>Feature files</td><td>ModuleName.feature</td><td>Login.feature, FlightSearch.feature</td></tr>
+  </tbody>
+</table>
+
+<h3>Locator Strategy</h3>
+
+<p>Choose locators in this priority order (most stable first):</p>
+
+<ol class="steps-list">
+  <li><strong>data-testid</strong> — Best choice. Dedicated test attribute that never changes with UI redesigns.</li>
+  <li><strong>id</strong> — Good if unique and stable. Avoid auto-generated IDs.</li>
+  <li><strong>name</strong> — Good for form fields.</li>
+  <li><strong>CSS selector</strong> — Shorter and faster than XPath for simple cases.</li>
+  <li><strong>XPath</strong> — Use as last resort. Keep it short (max 3 levels deep).</li>
+</ol>
+
+<div class="info-block tip">
+  <div class="info-block-title">Tips</div>
+  <p>Ask your developers to add <code>data-testid</code> attributes to key elements. This makes locators immune to CSS class changes and UI refactoring.</p>
+</div>
+
+<h3>Test Data Management</h3>
+
+<ul>
+  <li>Choose ONE data source (JSON or Excel) per project and stick with it.</li>
+  <li>Never store real credentials in test data files.</li>
+  <li>Use meaningful key names that describe the data (e.g., "ValidEmail" not "Data1").</li>
+  <li>Keep test data files small — one file per module.</li>
+  <li>Use the <code>TD_</code> prefix consistently in all feature files.</li>
+</ul>
+
+<h3>Parallel Execution</h3>
+
+<ul>
+  <li>Start with 1 thread until all tests pass reliably.</li>
+  <li>Increase threads gradually (2 → 4 → 8).</li>
+  <li>Each test must be independent — no test should depend on another test's result.</li>
+  <li>Use unique test data per test case to avoid conflicts.</li>
+  <li>Never share WebDriver instances between threads.</li>
+</ul>
+
+<h3>Maintenance</h3>
+
+<ul>
+  <li>Review and update locators when the UI changes.</li>
+  <li>Delete unused elements from the Object Repository.</li>
+  <li>Keep feature files short (5–15 steps per scenario).</li>
+  <li>Run the full regression suite at least once per sprint.</li>
+  <li>Fix flaky tests immediately — do not ignore them.</li>
+  <li>Use AI RCA reports to identify patterns in failures.</li>
+</ul>
+
+<div class="info-block note">
+  <div class="info-block-title">Note</div>
+  <p>The Kroviq framework handles many common issues automatically (stale element retry, JS fallback clicks, self-healing locators). If you follow these best practices, most tests will be stable and maintainable with minimal effort.</p>
+</div>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div style="margin-top:64px;padding-top:24px;border-top:1px solid var(--color-border);text-align:center">
+  <p style="font-size:0.8125rem;color:var(--color-text-muted)">
+    Kroviq User Guide · v2.5.9 · © 2025 Kroviq by KlivIQ Technologies
+  </p>
+</div>
+
+</main>
+
+<!-- ─── Scripts ─────────────────────────────────────────────── -->
+<script>
+// Search / filter navigation
+function filterNav(query) {
+  const links = document.querySelectorAll('.nav-link');
+  const q = query.toLowerCase().trim();
+  links.forEach(link => {
+    if (!q) {
+      link.classList.remove('hidden');
+    } else {
+      const text = link.textContent.toLowerCase();
+      link.classList.toggle('hidden', !text.includes(q));
+    }
+  });
+  // Show section titles if any child link is visible
+  document.querySelectorAll('.nav-section').forEach(section => {
+    const visibleLinks = section.querySelectorAll('.nav-link:not(.hidden)');
+    section.style.display = visibleLinks.length > 0 || !q ? '' : 'none';
+  });
+}
+
+// Scroll spy — highlight active nav link
+const mainEl = document.querySelector('.main');
+const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+const headings = [];
+
+navLinks.forEach(link => {
+  const id = link.getAttribute('href').slice(1);
+  const el = document.getElementById(id);
+  if (el) headings.push({ id, el, link });
+});
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + 100;
+  let active = headings[0];
+  for (const h of headings) {
+    if (h.el.offsetTop <= scrollY) active = h;
+  }
+  navLinks.forEach(l => l.classList.remove('active'));
+  if (active) active.link.classList.add('active');
+}, { passive: true });
+
+// Mobile: close sidebar on link click
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.sidebar').classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>
