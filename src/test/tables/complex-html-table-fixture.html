@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head><title>Complex HTML Table Engine Fixture</title></head>
+<body>
+<div id="enterpriseTable">
+    <table id="policyGrid" role="grid">
+        <thead>
+            <tr>
+                <th>Policy Number</th>
+                <th>Insured Name</th>
+                <th>Product</th>
+                <th>Status</th>
+                <th>Premium</th>
+                <th>Branch</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-row-id="1">
+                <td>POL-001</td>
+                <td>John Smith</td>
+                <td>Motor</td>
+                <td>Active</td>
+                <td>1500.00</td>
+                <td>New York</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                    <button aria-label="Delete" class="action-btn">Delete</button>
+                </td>
+            </tr>
+            <tr data-row-id="2">
+                <td>POL-002</td>
+                <td>Jane Doe</td>
+                <td>Health</td>
+                <td>Active</td>
+                <td>2300.00</td>
+                <td>Chicago</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                    <button aria-label="Delete" class="action-btn">Delete</button>
+                </td>
+            </tr>
+            <tr data-row-id="3">
+                <td>POL-003</td>
+                <td>Bob Wilson</td>
+                <td>Motor</td>
+                <td>Pending</td>
+                <td>980.00</td>
+                <td>New York</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                    <button aria-label="Approve">Approve</button>
+                </td>
+            </tr>
+            <tr data-row-id="4">
+                <td>POL-004</td>
+                <td>Alice Brown</td>
+                <td>Fire</td>
+                <td>Cancelled</td>
+                <td>0.00</td>
+                <td>Boston</td>
+                <td>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="5">
+                <td>POL-005</td>
+                <td>Charlie Davis</td>
+                <td>Motor</td>
+                <td>Active</td>
+                <td>3200.00</td>
+                <td>New York</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                    <button aria-label="Delete" class="action-btn">Delete</button>
+                </td>
+            </tr>
+            <tr data-row-id="6">
+                <td>POL-006</td>
+                <td>John Smith</td>
+                <td>Health</td>
+                <td>Pending</td>
+                <td>1800.00</td>
+                <td>Chicago</td>
+                <td>
+                    <button data-action="Edit">Edit</button>
+                    <a href="#" title="View">View</a>
+                    <button aria-label="Approve">Approve</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <nav class="pagination" aria-label="Table pagination">
+        <button class="prev" aria-label="Previous" disabled>Previous</button>
+        <button class="page" data-page="1" aria-current="page">1</button>
+        <button class="page" data-page="2">2</button>
+        <button class="page" data-page="3">3</button>
+        <button class="next" aria-label="Next">Next</button>
+    </nav>
+</div>
+
+<div id="claimsSection">
+    <table id="claimsGrid" role="grid">
+        <thead>
+            <tr>
+                <th>Claim Number</th>
+                <th>Policy Number</th>
+                <th>Claimant</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-row-id="c1">
+                <td>CLM-001</td>
+                <td>POL-001</td>
+                <td>John Smith</td>
+                <td>5000.00</td>
+                <td>Open</td>
+                <td>
+                    <button data-action="Approve">Approve</button>
+                    <button data-action="Reject">Reject</button>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="c2">
+                <td>CLM-002</td>
+                <td>POL-002</td>
+                <td>Jane Doe</td>
+                <td>12000.00</td>
+                <td>Under Review</td>
+                <td>
+                    <button data-action="Approve">Approve</button>
+                    <button data-action="Reject">Reject</button>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+            <tr data-row-id="c3">
+                <td>CLM-003</td>
+                <td>POL-001</td>
+                <td>John Smith</td>
+                <td>800.00</td>
+                <td>Closed</td>
+                <td>
+                    <a href="#" title="View">View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

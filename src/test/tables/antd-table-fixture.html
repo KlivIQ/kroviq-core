@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head><title>AntD Table Engine Fixture</title></head>
+<body>
+<div id="antdTableFixture" class="ant-table-wrapper">
+    <div class="ant-table">
+        <div class="ant-table-container">
+            <div class="ant-table-content">
+                <table>
+                    <thead class="ant-table-thead">
+                        <tr>
+                            <th class="ant-table-cell">Policy Number</th>
+                            <th class="ant-table-cell">Insured Name</th>
+                            <th class="ant-table-cell">Status</th>
+                            <th class="ant-table-cell">Premium</th>
+                            <th class="ant-table-cell">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ant-table-tbody">
+                        <tr class="ant-table-row" data-row-key="1">
+                            <td class="ant-table-cell"><span>POL-001</span></td>
+                            <td class="ant-table-cell"><span>John Smith</span></td>
+                            <td class="ant-table-cell"><span class="ant-tag ant-tag-green">Active</span></td>
+                            <td class="ant-table-cell"><span>1500.00</span></td>
+                            <td class="ant-table-cell">
+                                <button id="MeatBallMenu_1" class="ant-dropdown-trigger">⋮</button>
+                            </td>
+                        </tr>
+                        <tr class="ant-table-row" data-row-key="2">
+                            <td class="ant-table-cell"><span>POL-002</span></td>
+                            <td class="ant-table-cell"><span>Jane Doe</span></td>
+                            <td class="ant-table-cell"><span class="ant-tag ant-tag-orange">Pending</span></td>
+                            <td class="ant-table-cell"><span>2300.00</span></td>
+                            <td class="ant-table-cell">
+                                <button id="MeatBallMenu_2" class="ant-dropdown-trigger">⋮</button>
+                            </td>
+                        </tr>
+                        <tr class="ant-table-row" data-row-key="3">
+                            <td class="ant-table-cell"><span>POL-003</span></td>
+                            <td class="ant-table-cell"><span>Bob Wilson</span></td>
+                            <td class="ant-table-cell"><span class="ant-tag ant-tag-green">Active</span></td>
+                            <td class="ant-table-cell"><span>980.00</span></td>
+                            <td class="ant-table-cell">
+                                <button id="MeatBallMenu_3" class="ant-dropdown-trigger">⋮</button>
+                            </td>
+                        </tr>
+                        <tr class="ant-table-row" data-row-key="4">
+                            <td class="ant-table-cell"><span>POL-004</span></td>
+                            <td class="ant-table-cell"><span>Alice Brown</span></td>
+                            <td class="ant-table-cell"><span class="ant-tag ant-tag-red">Cancelled</span></td>
+                            <td class="ant-table-cell"><span>0.00</span></td>
+                            <td class="ant-table-cell">
+                                <button id="MeatBallMenu_4" class="ant-dropdown-trigger">⋮</button>
+                            </td>
+                        </tr>
+                        <tr class="ant-table-row" data-row-key="5">
+                            <td class="ant-table-cell"><span>POL-005</span></td>
+                            <td class="ant-table-cell"><span>Charlie Davis</span></td>
+                            <td class="ant-table-cell"><span class="ant-tag ant-tag-green">Active</span></td>
+                            <td class="ant-table-cell"><span>3200.00</span></td>
+                            <td class="ant-table-cell">
+                                <button id="MeatBallMenu_5" class="ant-dropdown-trigger">⋮</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- AntD Pagination -->
+    <ul class="ant-pagination">
+        <li class="ant-pagination-prev ant-pagination-disabled">
+            <button disabled>Previous</button>
+        </li>
+        <li class="ant-pagination-item ant-pagination-item-active" title="1"><a>1</a></li>
+        <li class="ant-pagination-item" title="2"><a>2</a></li>
+        <li class="ant-pagination-item" title="3"><a>3</a></li>
+        <li class="ant-pagination-next">
+            <button>Next</button>
+        </li>
+    </ul>
+</div>
+
+<!-- Dropdown menu (appears on meatball click) -->
+<div class="ant-dropdown" style="display:none;">
+    <ul class="ant-dropdown-menu">
+        <li class="ant-dropdown-menu-item"><span>Edit</span></li>
+        <li class="ant-dropdown-menu-item"><span>View</span></li>
+        <li class="ant-dropdown-menu-item"><span>Delete</span></li>
+        <li class="ant-dropdown-menu-item"><span>Approve</span></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head><title>MUI DataGrid Table Engine Fixture</title></head>
+<body>
+<div id="muiDataGridFixture" class="MuiDataGrid-root" role="grid">
+    <div class="MuiDataGrid-columnHeaders" role="rowgroup">
+        <div class="MuiDataGrid-columnHeader" role="columnheader" data-field="invoiceId">
+            <div class="MuiDataGrid-columnHeaderTitle">Invoice ID</div>
+        </div>
+        <div class="MuiDataGrid-columnHeader" role="columnheader" data-field="client">
+            <div class="MuiDataGrid-columnHeaderTitle">Client</div>
+        </div>
+        <div class="MuiDataGrid-columnHeader" role="columnheader" data-field="project">
+            <div class="MuiDataGrid-columnHeaderTitle">Project</div>
+        </div>
+        <div class="MuiDataGrid-columnHeader" role="columnheader" data-field="amount">
+            <div class="MuiDataGrid-columnHeaderTitle">Amount</div>
+        </div>
+        <div class="MuiDataGrid-columnHeader" role="columnheader" data-field="status">
+            <div class="MuiDataGrid-columnHeaderTitle">Status</div>
+        </div>
+        <div class="MuiDataGrid-columnHeader" role="columnheader" data-field="actions">
+            <div class="MuiDataGrid-columnHeaderTitle">Actions</div>
+        </div>
+    </div>
+    <div class="MuiDataGrid-virtualScroller">
+        <div class="MuiDataGrid-virtualScrollerContent">
+            <div class="MuiDataGrid-row" role="row" data-rowindex="0">
+                <div class="MuiDataGrid-cell" role="gridcell">INV-001</div>
+                <div class="MuiDataGrid-cell" role="gridcell">Acme Corp</div>
+                <div class="MuiDataGrid-cell" role="gridcell">Website Redesign</div>
+                <div class="MuiDataGrid-cell" role="gridcell">15000.00</div>
+                <div class="MuiDataGrid-cell" role="gridcell"><span class="MuiChip-root"><span class="MuiChip-label">Paid</span></span></div>
+                <div class="MuiDataGrid-cell" role="gridcell"><button title="View">View</button> <button title="Download">Download</button></div>
+            </div>
+            <div class="MuiDataGrid-row" role="row" data-rowindex="1">
+                <div class="MuiDataGrid-cell" role="gridcell">INV-002</div>
+                <div class="MuiDataGrid-cell" role="gridcell">TechStart LLC</div>
+                <div class="MuiDataGrid-cell" role="gridcell">Mobile App</div>
+                <div class="MuiDataGrid-cell" role="gridcell">28000.00</div>
+                <div class="MuiDataGrid-cell" role="gridcell"><span class="MuiChip-root"><span class="MuiChip-label">Pending</span></span></div>
+                <div class="MuiDataGrid-cell" role="gridcell"><button title="View">View</button> <button title="Download">Download</button></div>
+            </div>
+            <div class="MuiDataGrid-row" role="row" data-rowindex="2">
+                <div class="MuiDataGrid-cell" role="gridcell">INV-003</div>
+                <div class="MuiDataGrid-cell" role="gridcell">Acme Corp</div>
+                <div class="MuiDataGrid-cell" role="gridcell">API Integration</div>
+                <div class="MuiDataGrid-cell" role="gridcell">9500.00</div>
+                <div class="MuiDataGrid-cell" role="gridcell"><span class="MuiChip-root"><span class="MuiChip-label">Paid</span></span></div>
+                <div class="MuiDataGrid-cell" role="gridcell"><button title="View">View</button> <button title="Download">Download</button></div>
+            </div>
+            <div class="MuiDataGrid-row" role="row" data-rowindex="3">
+                <div class="MuiDataGrid-cell" role="gridcell">INV-004</div>
+                <div class="MuiDataGrid-cell" role="gridcell">GlobalTech Inc</div>
+                <div class="MuiDataGrid-cell" role="gridcell">Cloud Migration</div>
+                <div class="MuiDataGrid-cell" role="gridcell">45000.00</div>
+                <div class="MuiDataGrid-cell" role="gridcell"><span class="MuiChip-root"><span class="MuiChip-label">Overdue</span></span></div>
+                <div class="MuiDataGrid-cell" role="gridcell"><button title="View">View</button> <button title="Download">Download</button></div>
+            </div>
+            <div class="MuiDataGrid-row" role="row" data-rowindex="4">
+                <div class="MuiDataGrid-cell" role="gridcell">INV-005</div>
+                <div class="MuiDataGrid-cell" role="gridcell">StartupXYZ</div>
+                <div class="MuiDataGrid-cell" role="gridcell">Website Redesign</div>
+                <div class="MuiDataGrid-cell" role="gridcell">12000.00</div>
+                <div class="MuiDataGrid-cell" role="gridcell"><span class="MuiChip-root"><span class="MuiChip-label">Paid</span></span></div>
+                <div class="MuiDataGrid-cell" role="gridcell"><button title="View">View</button> <button title="Download">Download</button></div>
+            </div>
+        </div>
+    </div>
+    <div class="MuiDataGrid-footerContainer MuiTablePagination-root">
+        <button aria-label="Go to previous page" class="MuiIconButton-root Mui-disabled" disabled>Previous</button>
+        <span class="MuiTablePagination-displayedRows">1–5 of 15</span>
+        <button aria-label="Go to next page" class="MuiIconButton-root">Next</button>
+    </div>
+</div>
+</body>
+</html>
